@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Bloom — ตั้งค่า</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #d25f89;
+    --pink-dark: #b84e77;
+    --pink-light: #fce9f0;
+    --purple: #8d76c9;
+    --purple-light: #eeeafb;
+    --text: #302832;
+    --soft: #786c75;
+    --muted: #aaa0a7;
+    --bg: #fcfafb;
+    --white: #ffffff;
+    --border: #eee6eb;
+}
+
+body {
+    font-family: "Noto Sans Thai", "DM Sans", sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 90% 0%, #f3eafa, transparent 30%),
+        radial-gradient(circle at 0% 30%, #fcebf1, transparent 25%),
+        var(--bg);
+}
+
+button {
+    font-family: inherit;
+}
+
+.header {
+    width: 90%;
+    max-width: 1100px;
+    height: 78px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    color: white;
+    background: linear-gradient(135deg, #d7648d, #9c79cf);
+}
+
+.back-btn {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--soft);
+    padding: 9px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding-bottom: 120px;
+}
+
+.page-title {
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+.page-title small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.page-title h1 {
+    margin-top: 5px;
+    font-family: "DM Sans", "Noto Sans Thai", sans-serif;
+    font-size: 35px;
+    letter-spacing: -1px;
+}
+
+.page-title p {
+    margin-top: 5px;
+    color: var(--soft);
+    font-size: 12px;
+}
+
+.settings-card,
+.privacy-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 27px;
+    margin-top: 18px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 17px;
+}
+
+.card-header span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.setting-row {
+    margin-top: 18px;
+    padding: 17px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: #fff;
+}
+
+.setting-row strong {
+    display: block;
+    font-size: 13px;
+}
+
+.setting-row p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.theme-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.theme-option {
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    text-align: center;
+    transition: .2s;
+}
+
+.theme-option:hover {
+    transform: translateY(-1px);
+}
+
+.theme-option.active {
+    border-color: var(--pink);
+    background: var(--pink-light);
+}
+
+.theme-option span {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.theme-option small {
+    font-size: 10px;
+}
+
+.danger-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 13px;
+    border: 0;
+    border-radius: 12px;
+    background: #fff0f3;
+    color: var(--pink-dark);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.privacy-card p {
+    margin-top: 10px;
+    color: var(--soft);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+
+.backup-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.backup-btn,
+.install-btn {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.backup-btn:hover,
+.install-btn:hover {
+    border-color: var(--pink);
+    background: var(--pink-light);
+}
+
+.install-card {
+    display: none;
+}
+
+.install-card.show {
+    display: block;
+}
+
+.file-input {
+    display: none;
+}
+
+@media (max-width: 560px) {
+    .backup-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+html.dark-mode .backup-btn,
+html.dark-mode .install-btn {
+    background: #24202a;
+    color: #f5eef5;
+    border-color: #403745;
+}
+
+html.dark-mode .backup-btn:hover,
+html.dark-mode .install-btn:hover {
+    background: #352a35;
+}
+
+.bottom-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: min(570px, 90%);
+    padding: 9px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.94);
+    border: 1px solid var(--border);
+    box-shadow: 0 15px 45px rgba(60,45,55,.13);
+    backdrop-filter: blur(15px);
+    z-index: 50;
+}
+
+.nav-item {
+    padding: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    border-radius: 13px;
+    cursor: pointer;
+    font-size: 9px;
+}
+
+.nav-item span:first-child {
+    font-size: 17px;
+}
+
+.nav-item.active {
+    color: var(--pink);
+    background: var(--pink-light);
+    font-weight: 600;
+}
+
+html.dark-mode body {
+    --bg: #17141a;
+    --white: #211d24;
+    --text: #f4edf2;
+    --soft: #c0b4bd;
+    --muted: #938790;
+    --border: #352d36;
+    background:
+        radial-gradient(circle at 90% 0%, #30253a, transparent 30%),
+        radial-gradient(circle at 0% 30%, #38242e, transparent 25%),
+        var(--bg);
+    color: var(--text);
+}
+
+html.dark-mode .settings-card,
+html.dark-mode .privacy-card,
+html.dark-mode .setting-row {
+    background: #211d24;
+    border-color: var(--border);
+}
+
+html.dark-mode .theme-option {
+    background: #29232c;
+    border-color: #403640;
+    color: var(--text);
+}
+
+html.dark-mode .theme-option.active {
+    border-color: var(--pink);
+    background: #342630;
+}
+
+html.dark-mode .danger-btn {
+    background: #39272d;
+    color: #f0b8c8;
+}
+
+html.dark-mode .back-btn {
+    background: #29232c;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .bottom-nav {
+    background: rgba(33,29,36,.94);
+    border-color: var(--border);
+}
+
+@media (max-width: 600px) {
+    .header,
+    .container {
+        width: 92%;
+    }
+
+    .page-title h1 {
+        font-size: 29px;
+    }
+
+    .settings-card,
+    .privacy-card {
+        padding: 20px;
+    }
+}
+
+</style>
+
+<script>
+(function () {
+    const theme =
+        localStorage.getItem("bloom_theme") || "light";
+
+    if (theme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+    }
+})();
+</script>
+
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#d25f89">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        <div class="logo-icon">✿</div>
+        Bloom
+    </div>
+
+    <button
+        class="back-btn"
+        onclick="goDashboard()"
+    >
+        ← Dashboard
+    </button>
+
+</header>
+
+<main class="container">
+
+<section class="page-title">
+
+    <small>
+        BLOOM SETTINGS
+    </small>
+
+    <h1>
+        ตั้งค่า
+    </h1>
+
+    <p>
+        ปรับการแสดงผลและจัดการข้อมูลของ Bloom
+    </p>
+
+</section>
+
+<section class="settings-card">
+
+    <div class="card-header">
+        <h2>🎨 รูปแบบการแสดงผล</h2>
+        <span>APPEARANCE</span>
+    </div>
+
+    <div class="setting-row">
+
+        <strong>
+            ธีมของ Bloom
+        </strong>
+
+        <p>
+            เลือกโหมดสว่างหรือโหมดมืดได้ตามที่ต้องการ
+            และระบบจะจำค่าที่เลือกไว้ใน Browser นี้
+        </p>
+
+        <div class="theme-options">
+
+            <button
+                class="theme-option"
+                id="lightTheme"
+                onclick="setTheme('light')"
+            >
+                <span>☀️</span>
+                <small>โหมดสว่าง</small>
+            </button>
+
+            <button
+                class="theme-option"
+                id="darkTheme"
+                onclick="setTheme('dark')"
+            >
+                <span>🌙</span>
+                <small>โหมดมืด</small>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="privacy-card">
+
+    <div class="card-header">
+        <h2>🔒 ความเป็นส่วนตัว</h2>
+        <span>PRIVACY</span>
+    </div>
+
+    <p>
+        Bloom ไม่มีระบบ Login และข้อมูลรอบเดือนจะถูกเก็บไว้ใน
+        Browser ของอุปกรณ์นี้ผ่าน localStorage
+        ข้อมูลไม่ได้ถูกส่งไปยังเซิร์ฟเวอร์ของ Bloom
+    </p>
+
+    <button
+        class="danger-btn"
+        onclick="clearAllData()"
+    >
+        ล้างข้อมูลรอบเดือนทั้งหมด
+    </button>
+
+</section>
+
+<section class="privacy-card">
+
+    <div class="card-header">
+        <h2>💾 สำรองข้อมูล</h2>
+        <span>BACKUP</span>
+    </div>
+
+    <p>
+        ส่งออกข้อมูล Bloom เป็นไฟล์ .json เพื่อเก็บสำรองหรือย้ายไปใช้อีกอุปกรณ์
+        และสามารถนำไฟล์เดิมกลับมาได้ภายหลัง
+    </p>
+
+    <div class="backup-actions">
+        <button class="backup-btn" onclick="exportData()">📤 ส่งออกข้อมูล</button>
+        <button class="backup-btn" onclick="document.getElementById('importFile').click()">📥 นำเข้าข้อมูล</button>
+    </div>
+
+    <input
+        class="file-input"
+        id="importFile"
+        type="file"
+        accept="application/json,.json"
+        onchange="importData(event)"
+    >
+
+</section>
+
+<section class="privacy-card install-card" id="installCard">
+
+    <div class="card-header">
+        <h2>📱 ติดตั้ง Bloom</h2>
+        <span>APP</span>
+    </div>
+
+    <p>
+        เพิ่ม Bloom ไปยังหน้าจอหลักเพื่อเปิดใช้งานเหมือนแอปบนอุปกรณ์ที่รองรับ
+    </p>
+
+    <button class="install-btn" onclick="installBloom()">📱 เพิ่ม Bloom ไปยังหน้าจอหลัก</button>
+
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item"
+        onclick="goDashboard()"
+    >
+        <span>⌂</span>
+        <span>หน้าหลัก</span>
+    </button>
+
+    <button
+        class="nav-item"
+        onclick="goCalendar()"
+    >
+        <span>▣</span>
+        <span>ปฏิทิน</span>
+    </button>
+
+    <button
+        class="nav-item"
+        onclick="goStats()"
+    >
+        <span>◈</span>
+        <span>สถิติ</span>
+    </button>
+
+    <button
+        class="nav-item active"
+    >
+        <span>⚙</span>
+        <span>ตั้งค่า</span>
+    </button>
+
+</nav>
+
+<script>
+
+const THEME_KEY = "bloom_theme";
+const STORAGE_KEY = "bloom_periods";
+
+function getTheme() {
+    return localStorage.getItem(THEME_KEY) || "light";
+}
+
+function setTheme(theme) {
+
+    localStorage.setItem(THEME_KEY, theme);
+
+    document.documentElement.classList.toggle(
+        "dark-mode",
+        theme === "dark"
+    );
+
+    updateThemeButtons();
+}
+
+function updateThemeButtons() {
+
+    const theme = getTheme();
+
+    document
+        .getElementById("lightTheme")
+        ?.classList.toggle(
+            "active",
+            theme === "light"
+        );
+
+    document
+        .getElementById("darkTheme")
+        ?.classList.toggle(
+            "active",
+            theme === "dark"
+        );
+}
+
+
+
+function exportData() {
+
+    const backup = {
+        app: "Bloom",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        bloom_periods: JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"),
+        bloom_theme: localStorage.getItem(THEME_KEY) || "light"
+    };
+
+    const blob = new Blob(
+        [JSON.stringify(backup, null, 2)],
+        { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const date = new Date().toISOString().slice(0, 10);
+
+    a.href = url;
+    a.download = `bloom-backup-${date}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    alert("ส่งออกข้อมูล Bloom เรียบร้อยแล้ว");
+}
+
+function importData(event) {
+
+    const file = event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+
+        try {
+            const backup = JSON.parse(reader.result);
+
+            if (!backup || backup.app !== "Bloom" || !Array.isArray(backup.bloom_periods)) {
+                throw new Error("Invalid Bloom backup");
+            }
+
+            const ok = confirm(
+                "ต้องการนำเข้าข้อมูลจากไฟล์นี้ใช่ไหม?\n\nข้อมูลรอบเดือนที่มีอยู่ใน Browser นี้จะถูกแทนที่ด้วยข้อมูลจากไฟล์สำรอง"
+            );
+
+            if (!ok) {
+                event.target.value = "";
+                return;
+            }
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(backup.bloom_periods));
+
+            if (backup.bloom_theme === "dark" || backup.bloom_theme === "light") {
+                localStorage.setItem(THEME_KEY, backup.bloom_theme);
+                document.documentElement.classList.toggle(
+                    "dark-mode",
+                    backup.bloom_theme === "dark"
+                );
+                updateThemeButtons();
+            }
+
+            alert("นำเข้าข้อมูล Bloom เรียบร้อยแล้ว");
+            event.target.value = "";
+
+        } catch (error) {
+            alert("ไฟล์นี้ไม่ใช่ไฟล์สำรองของ Bloom ที่ถูกต้อง");
+            event.target.value = "";
+        }
+    };
+
+    reader.readAsText(file);
+}
+
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", function (event) {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    document.getElementById("installCard")?.classList.add("show");
+});
+
+async function installBloom() {
+
+    if (!deferredInstallPrompt) {
+        alert("หากไม่เห็นหน้าต่างติดตั้ง ให้เปิดเมนูของ Browser แล้วเลือก 'ติดตั้ง Bloom' หรือ 'เพิ่มไปยังหน้าจอหลัก'");
+        return;
+    }
+
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    document.getElementById("installCard")?.classList.remove("show");
+}
+
+function clearAllData() {
+
+    const ok = confirm(
+        "ต้องการล้างข้อมูลรอบเดือนทั้งหมดใช่ไหม?\n\nข้อมูลที่ลบแล้วจะไม่สามารถกู้คืนได้"
+    );
+
+    if (!ok) {
+        return;
+    }
+
+    localStorage.removeItem(STORAGE_KEY);
+
+    alert("ล้างข้อมูลรอบเดือนเรียบร้อยแล้ว");
+
+    goDashboard();
+}
+
+function goDashboard() {
+    window.location.href = "dashboard.html";
+}
+
+function goCalendar() {
+    window.location.href = "calendar.html";
+}
+
+function goStats() {
+    window.location.href = "stats.html";
+}
+
+updateThemeButtons();
+
+</script>
+
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (error) {
+            console.log("Bloom service worker error:", error);
+        });
+    });
+}
+</script>
+
+</body>
+</html>
