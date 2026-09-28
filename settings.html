@@ -550,41 +550,37 @@ html.dark-mode .bottom-nav {
 
 </main>
 
-<nav class="bottom-nav">
+<section class="card">
 
-    <button
-        class="nav-item"
-        onclick="goDashboard()"
-    >
-        <span>🏠</span>
-        <span>หน้าหลัก</span>
-    </button>
+        <div class="card-title">
+            เมนูด่วน
+        </div>
 
-    <button
-        class="nav-item"
-        onclick="goCalendar()"
-    >
-        <span>📅</span>
-        <span>ปฏิทิน</span>
-    </button>
+        <div class="action-list">
 
-    <button
-        class="nav-item"
-        onclick="goStats()"
-    >
-        <span>📊</span>
-        <span>สถิติ</span>
-    </button>
+            <button class="action-btn" onclick="recordPeriod()">
+                <span>🩸</span>
+                บันทึกรอบเดือน
+            </button>
 
-    <button
-        class="nav-item active"
-    >
-        <span>⚙️</span>
-        <span>ตั้งค่า</span>
-    </button>
+            <button class="action-btn" onclick="location.href='calendar.html'">
+                <span>📅</span>
+                ปฏิทิน
+            </button>
 
-</nav>
+            <button class="action-btn" onclick="location.href='stats.html'">
+                <span>📊</span>
+                สถิติ
+            </button>
 
+            <button class="action-btn" onclick="openSymptomModal()">
+                <span>📝</span>
+                บันทึกอาการ
+            </button>
+
+        </div>
+
+    </section>
 <script>
 
 const THEME_KEY = "bloom_theme";

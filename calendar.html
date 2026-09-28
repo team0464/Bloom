@@ -1291,69 +1291,37 @@ html.dark-mode .danger-btn {
 
     <!-- NAV -->
 
-    <nav class="bottom-nav">
+    <section class="card">
 
+        <div class="card-title">
+            เมนูด่วน
+        </div>
 
-        <button
-            class="nav-item"
-            onclick="goDashboard()"
-        >
+        <div class="action-list">
 
-            <span>🏠</span>
+            <button class="action-btn" onclick="recordPeriod()">
+                <span>🩸</span>
+                บันทึกรอบเดือน
+            </button>
 
-            <span>
-                หน้าหลัก
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item active"
-        >
-
-            <span>📅</span>
-
-            <span>
+            <button class="action-btn" onclick="location.href='calendar.html'">
+                <span>📅</span>
                 ปฏิทิน
-            </span>
+            </button>
 
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="goDashboardStats()"
-        >
-
-            <span>📊</span>
-
-            <span>
+            <button class="action-btn" onclick="location.href='stats.html'">
+                <span>📊</span>
                 สถิติ
-            </span>
+            </button>
 
-        </button>
+            <button class="action-btn" onclick="openSymptomModal()">
+                <span>📝</span>
+                บันทึกอาการ
+            </button>
 
+        </div>
 
-        <button
-            class="nav-item"
-            onclick="goSettings()"
-        >
-
-            <span>⚙️</span>
-
-            <span>
-                ตั้งค่า
-            </span>
-
-        </button>
-
-
-    </nav>
-
-
-
-    <script>
+    </section>
 
 
         /* =========================
