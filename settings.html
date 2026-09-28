@@ -220,64 +220,6 @@ button {
     line-height: 1.8;
 }
 
-
-
-.backup-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.backup-btn,
-.install-btn {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--white);
-    color: var(--text);
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.backup-btn:hover,
-.install-btn:hover {
-    border-color: var(--pink);
-    background: var(--pink-light);
-}
-
-.install-card {
-    display: none;
-}
-
-.install-card.show {
-    display: block;
-}
-
-.file-input {
-    display: none;
-}
-
-@media (max-width: 560px) {
-    .backup-actions {
-        grid-template-columns: 1fr;
-    }
-}
-
-html.dark-mode .backup-btn,
-html.dark-mode .install-btn {
-    background: #24202a;
-    color: #f5eef5;
-    border-color: #403745;
-}
-
-html.dark-mode .backup-btn:hover,
-html.dark-mode .install-btn:hover {
-    background: #352a35;
-}
-
 .bottom-nav {
     position: fixed;
     left: 50%;
@@ -397,11 +339,6 @@ html.dark-mode .bottom-nav {
 })();
 </script>
 
-
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#d25f89">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-
 </head>
 
 <body>
@@ -506,81 +443,43 @@ html.dark-mode .bottom-nav {
 
 </section>
 
-<section class="privacy-card">
-
-    <div class="card-header">
-        <h2>💾 สำรองข้อมูล</h2>
-        <span>BACKUP</span>
-    </div>
-
-    <p>
-        ส่งออกข้อมูล Bloom เป็นไฟล์ .json เพื่อเก็บสำรองหรือย้ายไปใช้อีกอุปกรณ์
-        และสามารถนำไฟล์เดิมกลับมาได้ภายหลัง
-    </p>
-
-    <div class="backup-actions">
-        <button class="backup-btn" onclick="exportData()">📤 ส่งออกข้อมูล</button>
-        <button class="backup-btn" onclick="document.getElementById('importFile').click()">📥 นำเข้าข้อมูล</button>
-    </div>
-
-    <input
-        class="file-input"
-        id="importFile"
-        type="file"
-        accept="application/json,.json"
-        onchange="importData(event)"
-    >
-
-</section>
-
-<section class="privacy-card install-card" id="installCard">
-
-    <div class="card-header">
-        <h2>📱 ติดตั้ง Bloom</h2>
-        <span>APP</span>
-    </div>
-
-    <p>
-        เพิ่ม Bloom ไปยังหน้าจอหลักเพื่อเปิดใช้งานเหมือนแอปบนอุปกรณ์ที่รองรับ
-    </p>
-
-    <button class="install-btn" onclick="installBloom()">📱 เพิ่ม Bloom ไปยังหน้าจอหลัก</button>
-
-</section>
-
 </main>
 
-<section class="card">
+<nav class="bottom-nav">
 
-        <div class="card-title">
-            เมนูด่วน
-        </div>
+    <button
+        class="nav-item"
+        onclick="goDashboard()"
+    >
+        <span>⌂</span>
+        <span>หน้าหลัก</span>
+    </button>
 
-        <div class="action-list">
+    <button
+        class="nav-item"
+        onclick="goCalendar()"
+    >
+        <span>▣</span>
+        <span>ปฏิทิน</span>
+    </button>
 
-            <button class="action-btn" onclick="recordPeriod()">
-                <span>🩸</span>
-                บันทึกรอบเดือน
-            </button>
+    <button
+        class="nav-item"
+        onclick="goStats()"
+    >
+        <span>◈</span>
+        <span>สถิติ</span>
+    </button>
 
-            <button class="action-btn" onclick="location.href='calendar.html'">
-                <span>📅</span>
-                ปฏิทิน
-            </button>
+    <button
+        class="nav-item active"
+    >
+        <span>⚙</span>
+        <span>ตั้งค่า</span>
+    </button>
 
-            <button class="action-btn" onclick="location.href='stats.html'">
-                <span>📊</span>
-                สถิติ
-            </button>
+</nav>
 
-            <button class="action-btn" onclick="openSymptomModal()">
-                <span>📝</span>
-                บันทึกอาการ
-            </button>
-
-        </div>
-
-    </section>
 <script>
 
 const THEME_KEY = "bloom_theme";
@@ -621,109 +520,6 @@ function updateThemeButtons() {
         );
 }
 
-
-
-function exportData() {
-
-    const backup = {
-        app: "Bloom",
-        version: 1,
-        exportedAt: new Date().toISOString(),
-        bloom_periods: JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"),
-        bloom_theme: localStorage.getItem(THEME_KEY) || "light"
-    };
-
-    const blob = new Blob(
-        [JSON.stringify(backup, null, 2)],
-        { type: "application/json" }
-    );
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    const date = new Date().toISOString().slice(0, 10);
-
-    a.href = url;
-    a.download = `bloom-backup-${date}.json`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-
-    alert("ส่งออกข้อมูล Bloom เรียบร้อยแล้ว");
-}
-
-function importData(event) {
-
-    const file = event.target.files[0];
-
-    if (!file) {
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function () {
-
-        try {
-            const backup = JSON.parse(reader.result);
-
-            if (!backup || backup.app !== "Bloom" || !Array.isArray(backup.bloom_periods)) {
-                throw new Error("Invalid Bloom backup");
-            }
-
-            const ok = confirm(
-                "ต้องการนำเข้าข้อมูลจากไฟล์นี้ใช่ไหม?\n\nข้อมูลรอบเดือนที่มีอยู่ใน Browser นี้จะถูกแทนที่ด้วยข้อมูลจากไฟล์สำรอง"
-            );
-
-            if (!ok) {
-                event.target.value = "";
-                return;
-            }
-
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(backup.bloom_periods));
-
-            if (backup.bloom_theme === "dark" || backup.bloom_theme === "light") {
-                localStorage.setItem(THEME_KEY, backup.bloom_theme);
-                document.documentElement.classList.toggle(
-                    "dark-mode",
-                    backup.bloom_theme === "dark"
-                );
-                updateThemeButtons();
-            }
-
-            alert("นำเข้าข้อมูล Bloom เรียบร้อยแล้ว");
-            event.target.value = "";
-
-        } catch (error) {
-            alert("ไฟล์นี้ไม่ใช่ไฟล์สำรองของ Bloom ที่ถูกต้อง");
-            event.target.value = "";
-        }
-    };
-
-    reader.readAsText(file);
-}
-
-let deferredInstallPrompt = null;
-
-window.addEventListener("beforeinstallprompt", function (event) {
-    event.preventDefault();
-    deferredInstallPrompt = event;
-    document.getElementById("installCard")?.classList.add("show");
-});
-
-async function installBloom() {
-
-    if (!deferredInstallPrompt) {
-        alert("หากไม่เห็นหน้าต่างติดตั้ง ให้เปิดเมนูของ Browser แล้วเลือก 'ติดตั้ง Bloom' หรือ 'เพิ่มไปยังหน้าจอหลัก'");
-        return;
-    }
-
-    deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
-    deferredInstallPrompt = null;
-    document.getElementById("installCard")?.classList.remove("show");
-}
-
 function clearAllData() {
 
     const ok = confirm(
@@ -755,17 +551,6 @@ function goStats() {
 
 updateThemeButtons();
 
-</script>
-
-
-<script>
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./sw.js").catch(function (error) {
-            console.log("Bloom service worker error:", error);
-        });
-    });
-}
 </script>
 
 </body>
