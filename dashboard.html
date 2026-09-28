@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bloom — Dashboard</title>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+            --pink: #d25f89;
+            --pink-dark: #b84e77;
+            --pink-light: #fce9f0;
+
+            --purple: #8d76c9;
+            --purple-light: #eeeafb;
+
+            --text: #302832;
+            --soft: #786c75;
+            --muted: #aaa0a7;
+
+            --bg: #fcfafb;
+            --white: #ffffff;
+
+            --border: #eee6eb;
+        }
+
+
+        body {
+            font-family:
+                "Noto Sans Thai",
+                "DM Sans",
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 90% 0%,
+                    #f3eafa,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 0% 30%,
+                    #fcebf1,
+                    transparent 25%
+                ),
+                var(--bg);
+
+            color: var(--text);
+
+            min-height: 100vh;
+        }
+
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            width: 90%;
+            max-width: 1180px;
+
+            height: 78px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d7648d,
+                    #9c79cf
+                );
+        }
+
+
+        .private-badge {
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            color: var(--soft);
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding-bottom: 110px;
+        }
+
+
+        .welcome {
+            padding-top: 28px;
+            margin-bottom: 28px;
+        }
+
+
+        .welcome small {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        .welcome h1 {
+            margin-top: 5px;
+
+            font-family:
+                "DM Sans",
+                "Noto Sans Thai",
+                sans-serif;
+
+            font-size: 38px;
+
+            line-height: 1.2;
+
+            letter-spacing: -1px;
+        }
+
+
+        .welcome p {
+            margin-top: 7px;
+
+            color: var(--soft);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           TOP GRID
+        ========================= */
+
+        .top-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.6fr
+                1fr;
+
+            gap: 18px;
+        }
+
+
+        /* =========================
+           NEXT PERIOD CARD
+        ========================= */
+
+        .next-card {
+            min-height: 370px;
+
+            padding: 32px;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff,
+                    #fff7fa
+                );
+
+            border: 1px solid var(--border);
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 18px 45px rgba(80,60,75,0.06);
+        }
+
+
+        .next-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            right: -100px;
+            top: -100px;
+
+            background: #f8e5ed;
+
+            opacity: 0.7;
+        }
+
+
+        .next-label {
+            color: var(--soft);
+
+            font-size: 12px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .next-title {
+            margin-top: 7px;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .next-content {
+            display: flex;
+            align-items: center;
+
+            gap: 50px;
+
+            margin-top: 20px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* RING */
+
+        .ring {
+            width: 185px;
+            height: 185px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
+
+            background:
+                conic-gradient(
+                    var(--pink) 0deg 280deg,
+                    #f1e5ea 280deg 360deg
+                );
+
+            position: relative;
+        }
+
+
+        .ring::before {
+            content: "";
+
+            position: absolute;
+
+            width: 157px;
+            height: 157px;
+
+            border-radius: 50%;
+
+            background: white;
+        }
+
+
+        .ring-inside {
+            position: relative;
+
+            text-align: center;
+        }
+
+
+        .ring-number {
+            display: block;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 53px;
+
+            font-weight: 700;
+
+            line-height: 1;
+        }
+
+
+        .ring-days {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        .next-info {
+            display: flex;
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+
+        .info-label {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+
+        .info-value {
+            display: block;
+
+            margin-top: 3px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .empty-message {
+            color: var(--soft);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .actions-card {
+            padding: 28px;
+
+            border-radius: 26px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+        }
+
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .card-heading h2 {
+            font-size: 17px;
+        }
+
+
+        .card-heading span {
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+
+        .action-list {
+            display: flex;
+            flex-direction: column;
+
+            gap: 12px;
+
+            margin-top: 22px;
+        }
+
+
+        .action {
+            width: 100%;
+
+            padding: 15px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            background: #fff;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition: 0.2s;
+        }
+
+
+        .action:hover {
+            transform: translateY(-2px);
+
+            border-color: #e3cad5;
+
+            background: #fffafb;
+        }
+
+
+        .action-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            background: var(--pink-light);
+
+            font-size: 18px;
+        }
+
+
+        .action:nth-child(2) .action-icon {
+            background: var(--purple-light);
+        }
+
+
+        .action:nth-child(3) .action-icon {
+            background: #eaf2fb;
+        }
+
+
+        .action-text strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .action-text small {
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-top: 18px;
+        }
+
+
+        .stat {
+            padding: 23px;
+
+            border-radius: 21px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+        }
+
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            background: var(--pink-light);
+        }
+
+
+        .stat:nth-child(2) .stat-icon {
+            background: var(--purple-light);
+        }
+
+
+        .stat:nth-child(3) .stat-icon {
+            background: #eaf2fb;
+        }
+
+
+        .stat-label {
+            margin-top: 18px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+
+        .stat-value {
+            margin-top: 3px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 24px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           HISTORY
+        ========================= */
+
+        .history-card {
+            margin-top: 18px;
+
+            padding: 27px;
+
+            border-radius: 24px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+        }
+
+
+        .history-list {
+            margin-top: 20px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+
+        .history-item {
+            padding: 15px;
+
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #fcfafb;
+
+            border: 1px solid #f1e9ed;
+        }
+
+
+        .history-left {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .history-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: var(--pink-light);
+        }
+
+
+        .history-date strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .history-date small {
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+
+        .history-duration {
+            color: var(--soft);
+
+            font-size: 11px;
+        }
+
+
+        .no-history {
+            padding: 25px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           BOTTOM NAV
+        ========================= */
+
+        .bottom-nav {
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 18px;
+
+            transform: translateX(-50%);
+
+            width: min(570px, 90%);
+
+            padding: 9px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 5px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.94);
+
+            border: 1px solid var(--border);
+
+            box-shadow:
+                0 15px 45px rgba(60,45,55,0.13);
+
+            backdrop-filter: blur(15px);
+
+            z-index: 50;
+        }
+
+
+        .nav-item {
+            padding: 9px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 3px;
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--muted);
+
+            border-radius: 13px;
+
+            cursor: pointer;
+
+            font-size: 9px;
+        }
+
+
+        .nav-item span:first-child {
+            font-size: 17px;
+        }
+
+
+        .nav-item.active {
+            color: var(--pink);
+
+            background: var(--pink-light);
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(45,35,42,0.4);
+
+            backdrop-filter: blur(6px);
+        }
+
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+
+        .modal {
+            width: min(450px, 100%);
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background: white;
+
+            box-shadow:
+                0 25px 70px rgba(30,20,30,0.2);
+        }
+
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+
+        .modal-header h2 {
+            font-size: 20px;
+        }
+
+
+        .close-btn {
+            width: 34px;
+            height: 34px;
+
+            border: 0;
+
+            border-radius: 10px;
+
+            background: #f7f3f5;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+
+        .form-group {
+            margin-top: 22px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--soft);
+
+            font-size: 11px;
+        }
+
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border-radius: 12px;
+
+            border: 1px solid #e6dfe3;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            background: #fff;
+        }
+
+
+        .form-group input:focus {
+            border-color: #d58aa5;
+
+            box-shadow:
+                0 0 0 3px #fcecf2;
+        }
+
+
+        .modal-buttons {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .modal-btn {
+            padding: 13px;
+
+            border-radius: 12px;
+
+            border: 0;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .cancel-btn {
+            background: #f6f2f4;
+
+            color: var(--soft);
+        }
+
+
+        .save-btn {
+            background: var(--pink);
+
+            color: white;
+        }
+
+
+        .notice {
+            margin-top: 16px;
+
+            padding: 11px;
+
+            border-radius: 11px;
+
+            background: #fff6e9;
+
+            color: #987a4c;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .top-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .next-content {
+                justify-content: center;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                width: 92%;
+            }
+
+
+            .container {
+                width: 92%;
+            }
+
+
+            .welcome h1 {
+                font-size: 31px;
+            }
+
+
+            .next-card {
+                padding: 24px;
+            }
+
+
+            .next-content {
+                flex-direction: column;
+
+                gap: 25px;
+            }
+
+
+            .ring {
+                width: 165px;
+                height: 165px;
+            }
+
+
+            .ring::before {
+                width: 140px;
+                height: 140px;
+            }
+
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+
+            .history-card {
+                padding: 20px;
+            }
+
+        }
+
+    
+/* =========================
+   BLOOM DARK MODE
+   เพิ่มเฉพาะการตั้งค่าธีม
+========================= */
+
+html.dark-mode body {
+    --bg: #17141a;
+    --white: #211d24;
+    --text: #f4edf2;
+    --soft: #c0b4bd;
+    --muted: #938790;
+    --border: #352d36;
+    background:
+        radial-gradient(circle at 90% 0%, #30253a, transparent 30%),
+        radial-gradient(circle at 0% 30%, #38242e, transparent 25%),
+        var(--bg);
+    color: var(--text);
+}
+
+html.dark-mode .next-card,
+html.dark-mode .actions-card,
+html.dark-mode .stat,
+html.dark-mode .history-card,
+html.dark-mode .calendar-card,
+html.dark-mode .summary-card,
+html.dark-mode .chart-card,
+html.dark-mode .stat-card,
+html.dark-mode .modal {
+    background: #211d24;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .period-info,
+html.dark-mode .history-item,
+html.dark-mode .day,
+html.dark-mode .action,
+html.dark-mode .back-btn,
+html.dark-mode .month-btn,
+html.dark-mode .private-badge,
+html.dark-mode .form-group input,
+html.dark-mode .close-btn,
+html.dark-mode .cancel-btn {
+    background: #29232c;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .bottom-nav {
+    background: rgba(33,29,36,.94);
+    border-color: var(--border);
+}
+
+html.dark-mode .action:hover,
+html.dark-mode .back-btn:hover,
+html.dark-mode .month-btn:hover {
+    background: #302832;
+}
+
+html.dark-mode .ring::before {
+    background: #211d24;
+}
+
+html.dark-mode .day.other-month {
+    opacity: .18;
+}
+
+html.dark-mode .legend-today {
+    background: #211d24;
+}
+
+html.dark-mode .insight {
+    background: linear-gradient(135deg, #30232b, #28243a);
+    border-color: #3c3039;
+}
+
+html.dark-mode .chart-area {
+    border-color: #403640;
+}
+
+html.dark-mode .chart-line {
+    border-color: #403640;
+}
+
+html.dark-mode .history-table th {
+    border-color: var(--border);
+}
+
+html.dark-mode .history-table td {
+    border-color: #332b34;
+}
+
+html.dark-mode .modal-overlay {
+    background: rgba(0,0,0,.58);
+}
+
+html.dark-mode .notice {
+    background: #342d22;
+    color: #d7bd8a;
+}
+
+/* index.html */
+html.dark-mode .period-card,
+html.dark-mode .floating {
+    background: rgba(33,29,36,.96);
+    border-color: #3a323b;
+    color: var(--text);
+}
+
+html.dark-mode .period-info {
+    background: #29232c;
+}
+
+html.dark-mode .calendar .days {
+    color: #d8cdd5;
+}
+
+html.dark-mode footer {
+    border-color: var(--border);
+}
+
+html.dark-mode .feature,
+html.dark-mode .cta {
+    background: #211d24;
+    border-color: #352d36;
+}
+
+html.dark-mode .secondary-btn {
+    background: #29232c;
+    border-color: #413742;
+    color: var(--text);
+}
+
+html.dark-mode .nav-login {
+    background: #29232c;
+    border-color: #413742;
+    color: var(--text);
+}
+
+/* settings page */
+html.dark-mode .settings-card,
+html.dark-mode .setting-row,
+html.dark-mode .privacy-card {
+    background: #211d24;
+    border-color: var(--border);
+}
+
+html.dark-mode .theme-option {
+    background: #29232c;
+    border-color: #403640;
+    color: var(--text);
+}
+
+html.dark-mode .theme-option.active {
+    border-color: var(--pink);
+    background: #342630;
+}
+
+html.dark-mode .danger-btn {
+    background: #39272d;
+    color: #f0b8c8;
+}
+
+    
+/* =========================
+   DAILY SYMPTOMS
+========================= */
+.symptom-action .action-icon { background:#f5eefb; }
+.symptom-modal-options { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:12px; }
+.symptom-option { padding:12px 8px; border:1px solid var(--border); border-radius:13px; background:#fff; color:var(--text); cursor:pointer; font-family:inherit; font-size:11px; transition:.2s; }
+.symptom-option:hover { transform:translateY(-1px); }
+.symptom-option.selected { border-color:var(--pink); background:var(--pink-light); }
+.symptom-help { margin-top:10px; color:var(--muted); font-size:10px; line-height:1.6; }
+.symptom-save { width:100%; margin-top:16px; padding:13px; border:0; border-radius:12px; background:var(--pink); color:#fff; cursor:pointer; font-family:inherit; font-size:12px; font-weight:600; }
+.symptom-today { margin-top:16px; padding:14px; border-radius:14px; background:#fcfafb; border:1px solid #f1e9ed; }
+.symptom-today strong { font-size:12px; }
+.symptom-chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.symptom-chip { padding:5px 8px; border-radius:999px; background:var(--pink-light); color:var(--pink-dark); font-size:9px; }
+html.dark-mode .symptom-option { background:#29232c; border-color:var(--border); color:var(--text); }
+html.dark-mode .symptom-option.selected { background:#342630; border-color:var(--pink); }
+html.dark-mode .symptom-today { background:#29232c; border-color:var(--border); }
+
+</style>
+<script>
+(function () {
+    const theme =
+        localStorage.getItem("bloom_theme") || "light";
+
+    if (theme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+    }
+})();
+</script>
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#d25f89">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                ✿
+            </div>
+
+            Bloom
+
+        </div>
+
+
+        <div class="private-badge">
+            🔒 ใช้ส่วนตัว
+        </div>
+
+    </header>
+
+
+
+    <main class="container">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <small id="todayText">
+                วันนี้
+            </small>
+
+            <h1>
+                สวัสดี 🌸
+            </h1>
+
+            <p>
+                ติดตามรอบเดือนของคุณได้จากที่นี่
+            </p>
+
+        </section>
+
+
+
+        <!-- TOP -->
+
+        <section class="top-grid">
+
+
+            <!-- NEXT PERIOD -->
+
+            <div class="next-card">
+
+                <div class="next-label">
+                    การคาดการณ์รอบเดือน
+                </div>
+
+                <div class="next-title">
+                    รอบเดือนถัดไป
+                </div>
+
+
+                <div class="next-content">
+
+
+                    <div class="ring">
+
+                        <div class="ring-inside">
+
+                            <span
+                                class="ring-number"
+                                id="daysLeft"
+                            >
+                                —
+                            </span>
+
+                            <span class="ring-days">
+                                วัน
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="next-info">
+
+                        <div>
+
+                            <span class="info-label">
+                                คาดว่าจะเริ่ม
+                            </span>
+
+                            <span
+                                class="info-value"
+                                id="nextDate"
+                            >
+                                ยังไม่มีข้อมูล
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="info-label">
+                                รอบเฉลี่ย
+                            </span>
+
+                            <span
+                                class="info-value"
+                                id="averageCycle"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="info-label">
+                                รอบล่าสุด
+                            </span>
+
+                            <span
+                                class="info-value"
+                                id="lastPeriod"
+                            >
+                                ยังไม่มีข้อมูล
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions-card">
+
+                <div class="card-heading">
+
+                    <h2>
+                        เมนูด่วน
+                    </h2>
+
+                    <span>
+                        QUICK ACTIONS
+                    </span>
+
+                </div>
+
+
+                <div class="action-list">
+
+
+                    <button
+                        class="action"
+                        onclick="openModal()"
+                    >
+
+                        <div class="action-icon">
+                            🩸
+                        </div>
+
+                        <div class="action-text">
+
+                            <strong>
+                                บันทึกรอบเดือน
+                            </strong>
+
+                            <small>
+                                เพิ่มข้อมูลรอบล่าสุด
+                            </small>
+
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="action"
+                        onclick="goCalendar()"
+                    >
+
+                        <div class="action-icon">
+                            📅
+                        </div>
+
+                        <div class="action-text">
+
+                            <strong>
+                                ปฏิทิน
+                            </strong>
+
+                            <small>
+                                ดูวันที่และรอบเดือน
+                            </small>
+
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="action symptom-action"
+                        onclick="openSymptomModal()"
+                    >
+
+                        <div class="action-icon">📝</div>
+
+                        <div class="action-text">
+                            <strong>บันทึกอาการ</strong>
+                            <small>จดอาการของวันนี้</small>
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="action"
+                        onclick="showStats()"
+                    >
+
+                        <div class="action-icon">
+                            📊
+                        </div>
+
+                        <div class="action-text">
+
+                            <strong>
+                                สถิติรอบเดือน
+                            </strong>
+
+                            <small>
+                                ดูข้อมูลย้อนหลัง
+                            </small>
+
+                        </div>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <span class="stat-icon">
+                        🩸
+                    </span>
+
+                </div>
+
+                <div class="stat-label">
+                    ระยะมีประจำเดือนเฉลี่ย
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="averageDuration"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <span class="stat-icon">
+                        🔄
+                    </span>
+
+                </div>
+
+                <div class="stat-label">
+                    จำนวนรอบที่บันทึก
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="periodCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+
+                    <span class="stat-icon">
+                        📈
+                    </span>
+
+                </div>
+
+                <div class="stat-label">
+                    ความยาวรอบล่าสุด
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="latestCycle"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- HISTORY -->
+
+        <section class="history-card">
+
+            <div class="card-heading">
+
+                <h2>
+                    ประวัติรอบเดือน
+                </h2>
+
+                <span>
+                    HISTORY
+                </span>
+
+            </div>
+
+
+            <div
+                class="history-list"
+                id="historyList"
+            >
+
+                <div class="no-history">
+                    ยังไม่มีข้อมูลรอบเดือน
+                    <br>
+                    กด "บันทึกรอบเดือน" เพื่อเริ่มต้น
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+        <button
+            class="nav-item active"
+            onclick="window.scrollTo({top:0, behavior:'smooth'})"
+        >
+
+            <span>⌂</span>
+            <span>หน้าหลัก</span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="goCalendar()"
+        >
+
+            <span>▣</span>
+            <span>ปฏิทิน</span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="showStats()"
+        >
+
+            <span>◈</span>
+            <span>สถิติ</span>
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            onclick="goSettings()"
+        >
+
+            <span>⚙</span>
+            <span>ตั้งค่า</span>
+
+        </button>
+
+    </nav>
+
+
+
+
+    <div class="modal-overlay" id="symptomModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>📝 บันทึกอาการ</h2>
+                <button class="close-btn" onclick="closeSymptomModal()">×</button>
+            </div>
+            <div class="form-group">
+                <label>วันที่</label>
+                <input type="date" id="symptomDate">
+            </div>
+            <div class="form-group">
+                <label>เลือกอาการที่พบ</label>
+                <div class="symptom-modal-options" id="symptomOptions"></div>
+                <div class="symptom-help">เลือกได้หลายอาการ ระบบจะบันทึกไว้ใน Browser ของอุปกรณ์นี้</div>
+            </div>
+            <button class="symptom-save" onclick="saveSymptoms()">บันทึกอาการ</button>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+
+    <div
+        class="modal-overlay"
+        id="modal"
+    >
+
+        <div class="modal">
+
+
+            <div class="modal-header">
+
+                <h2>
+                    🩸 บันทึกรอบเดือน
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeModal()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    วันเริ่มต้น
+                </label>
+
+                <input
+                    type="date"
+                    id="startDate"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    วันสิ้นสุด
+                </label>
+
+                <input
+                    type="date"
+                    id="endDate"
+                >
+
+            </div>
+
+
+            <div class="notice">
+                ข้อมูลนี้จะถูกเก็บไว้ใน Browser ของอุปกรณ์นี้
+                และใช้สำหรับคำนวณสถิติและคาดการณ์รอบถัดไป
+            </div>
+
+
+            <div class="modal-buttons">
+
+                <button
+                    class="modal-btn cancel-btn"
+                    onclick="closeModal()"
+                >
+                    ยกเลิก
+                </button>
+
+
+                <button
+                    class="modal-btn save-btn"
+                    onclick="savePeriod()"
+                >
+                    บันทึกข้อมูล
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* =========================
+           STORAGE
+        ========================= */
+
+        const STORAGE_KEY = "bloom_periods";
+
+
+        function getPeriods() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(STORAGE_KEY)
+                ) || [];
+
+            } catch {
+
+                return [];
+
+            }
+
+        }
+
+
+        function savePeriods(periods) {
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(periods)
+            );
+
+        }
+
+
+        /* =========================
+           DATE HELPERS
+        ========================= */
+
+        function dateOnly(date) {
+
+            return new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate()
+            );
+
+        }
+
+
+        function parseDate(value) {
+
+            const [year, month, day] =
+                value.split("-").map(Number);
+
+            return new Date(
+                year,
+                month - 1,
+                day
+            );
+
+        }
+
+
+        function formatDate(date) {
+
+            return date.toLocaleDateString(
+                "th-TH",
+                {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                }
+            );
+
+        }
+
+
+        function diffDays(a, b) {
+
+            const ms =
+                dateOnly(b) -
+                dateOnly(a);
+
+            return Math.round(
+                ms / 86400000
+            );
+
+        }
+
+
+        function addDays(date, days) {
+
+            const result = new Date(date);
+
+            result.setDate(
+                result.getDate() + days
+            );
+
+            return result;
+
+        }
+
+
+        /* =========================
+           TODAY
+        ========================= */
+
+        function updateToday() {
+
+            const today = new Date();
+
+            document.getElementById(
+                "todayText"
+            ).textContent =
+                today.toLocaleDateString(
+                    "th-TH",
+                    {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }
+                );
+
+        }
+
+
+        /* =========================
+           CALCULATIONS
+        ========================= */
+
+        function calculateData(periods) {
+
+            if (!periods.length) {
+
+                return {
+                    averageCycle: null,
+                    averageDuration: null,
+                    nextDate: null,
+                    daysLeft: null,
+                    latestCycle: null
+                };
+
+            }
+
+
+            const sorted = [...periods].sort(
+                (a, b) =>
+                    parseDate(a.start) -
+                    parseDate(b.start)
+            );
+
+
+            const durations = sorted.map(
+                period =>
+                    diffDays(
+                        parseDate(period.start),
+                        parseDate(period.end)
+                    ) + 1
+            );
+
+
+            const averageDuration =
+                durations.reduce(
+                    (sum, value) =>
+                        sum + value,
+                    0
+                ) / durations.length;
+
+
+            let cycles = [];
+
+
+            for (
+                let i = 1;
+                i < sorted.length;
+                i++
+            ) {
+
+                const days =
+                    diffDays(
+                        parseDate(
+                            sorted[i - 1].start
+                        ),
+                        parseDate(
+                            sorted[i].start
+                        )
+                    );
+
+
+                if (
+                    days > 0 &&
+                    days < 100
+                ) {
+
+                    cycles.push(days);
+
+                }
+
+            }
+
+
+            /*
+                ถ้ามีเพียงรอบเดียว
+                ใช้ค่าเริ่มต้น 28 วัน
+                จนกว่าจะมีข้อมูลเพิ่ม
+            */
+
+            const averageCycle =
+                cycles.length
+                    ? Math.round(
+                        cycles.reduce(
+                            (a, b) =>
+                                a + b,
+                            0
+                        ) / cycles.length
+                    )
+                    : 28;
+
+
+            const latest =
+                sorted[sorted.length - 1];
+
+
+            const nextDate =
+                addDays(
+                    parseDate(latest.start),
+                    averageCycle
+                );
+
+
+            const today =
+                dateOnly(new Date());
+
+
+            let daysLeft =
+                diffDays(
+                    today,
+                    nextDate
+                );
+
+
+            /*
+                ถ้าวันคาดการณ์ผ่านไปแล้ว
+                ขยับไป cycle ถัดไป
+            */
+
+            if (daysLeft < 0) {
+
+                const cyclesPassed =
+                    Math.ceil(
+                        Math.abs(daysLeft) /
+                        averageCycle
+                    );
+
+
+                nextDate.setDate(
+                    nextDate.getDate() +
+                    cyclesPassed *
+                    averageCycle
+                );
+
+
+                daysLeft =
+                    diffDays(
+                        today,
+                        nextDate
+                    );
+
+            }
+
+
+            return {
+
+                averageCycle,
+
+                averageDuration:
+                    Math.round(
+                        averageDuration * 10
+                    ) / 10,
+
+                nextDate,
+
+                daysLeft,
+
+                latestCycle:
+                    cycles.length
+                        ? cycles[
+                            cycles.length - 1
+                        ]
+                        : null
+
+            };
+
+        }
+
+
+        /* =========================
+           UPDATE DASHBOARD
+        ========================= */
+
+        function updateDashboard() {
+
+            const periods =
+                getPeriods();
+
+
+            const data =
+                calculateData(periods);
+
+
+            document.getElementById(
+                "periodCount"
+            ).textContent =
+                periods.length;
+
+
+            if (!periods.length) {
+
+                document.getElementById(
+                    "daysLeft"
+                ).textContent = "—";
+
+
+                document.getElementById(
+                    "nextDate"
+                ).textContent =
+                    "ยังไม่มีข้อมูล";
+
+
+                document.getElementById(
+                    "averageCycle"
+                ).textContent =
+                    "—";
+
+
+                document.getElementById(
+                    "lastPeriod"
+                ).textContent =
+                    "ยังไม่มีข้อมูล";
+
+
+                document.getElementById(
+                    "averageDuration"
+                ).textContent =
+                    "—";
+
+
+                document.getElementById(
+                    "latestCycle"
+                ).textContent =
+                    "—";
+
+
+                renderHistory([]);
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "daysLeft"
+            ).textContent =
+                data.daysLeft;
+
+
+            document.getElementById(
+                "nextDate"
+            ).textContent =
+                formatDate(
+                    data.nextDate
+                );
+
+
+            document.getElementById(
+                "averageCycle"
+            ).textContent =
+                data.averageCycle +
+                " วัน";
+
+
+            const sorted =
+                [...periods].sort(
+                    (a,b) =>
+                        parseDate(b.start) -
+                        parseDate(a.start)
+                );
+
+
+            const latest =
+                sorted[0];
+
+
+            document.getElementById(
+                "lastPeriod"
+            ).textContent =
+                formatDate(
+                    parseDate(latest.start)
+                );
+
+
+            document.getElementById(
+                "averageDuration"
+            ).textContent =
+                data.averageDuration +
+                " วัน";
+
+
+            document.getElementById(
+                "latestCycle"
+            ).textContent =
+                data.latestCycle
+                    ? data.latestCycle + " วัน"
+                    : "—";
+
+
+            renderHistory(sorted);
+
+        }
+
+
+        /* =========================
+           HISTORY
+        ========================= */
+
+        function renderHistory(periods) {
+
+            const list =
+                document.getElementById(
+                    "historyList"
+                );
+
+
+            if (!periods.length) {
+
+                list.innerHTML = `
+                    <div class="no-history">
+                        ยังไม่มีข้อมูลรอบเดือน
+                        <br>
+                        กด "บันทึกรอบเดือน"
+                        เพื่อเริ่มต้น
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            list.innerHTML =
+                periods
+                    .slice(0, 6)
+                    .map(period => {
+
+                        const duration =
+                            diffDays(
+                                parseDate(
+                                    period.start
+                                ),
+                                parseDate(
+                                    period.end
+                                )
+                            ) + 1;
+
+
+                        return `
+                            <div class="history-item">
+
+                                <div class="history-left">
+
+                                    <div class="history-icon">
+                                        🩸
+                                    </div>
+
+                                    <div class="history-date">
+
+                                        <strong>
+                                            ${formatDate(
+                                                parseDate(
+                                                    period.start
+                                                )
+                                            )}
+                                        </strong>
+
+                                        <small>
+                                            ถึง
+                                            ${formatDate(
+                                                parseDate(
+                                                    period.end
+                                                )
+                                            )}
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="history-duration">
+                                    ${duration} วัน
+                                </div>
+
+                            </div>
+                        `;
+
+                    })
+                    .join("");
+
+        }
+
+
+        /* =========================
+           MODAL
+        ========================= */
+
+        function openModal() {
+
+            document.getElementById(
+                "modal"
+            ).classList.add("show");
+
+
+            const today =
+                new Date()
+                    .toISOString()
+                    .split("T")[0];
+
+
+            document.getElementById(
+                "startDate"
+            ).value = today;
+
+
+            document.getElementById(
+                "endDate"
+            ).value = today;
+
+        }
+
+
+        function closeModal() {
+
+            document.getElementById(
+                "modal"
+            ).classList.remove("show");
+
+        }
+
+
+        /* =========================
+           SAVE
+        ========================= */
+
+        function savePeriod() {
+
+            const start =
+                document.getElementById(
+                    "startDate"
+                ).value;
+
+
+            const end =
+                document.getElementById(
+                    "endDate"
+                ).value;
+
+
+            if (!start || !end) {
+
+                alert(
+                    "กรุณาเลือกวันเริ่มต้นและวันสิ้นสุด"
+                );
+
+                return;
+
+            }
+
+
+            const startDate =
+                parseDate(start);
+
+
+            const endDate =
+                parseDate(end);
+
+
+            if (endDate < startDate) {
+
+                alert(
+                    "วันสิ้นสุดต้องไม่ก่อนวันเริ่มต้น"
+                );
+
+                return;
+
+            }
+
+
+            const duration =
+                diffDays(
+                    startDate,
+                    endDate
+                ) + 1;
+
+
+            if (duration > 15) {
+
+                const confirmLong =
+                    confirm(
+                        "ระยะเวลาที่บันทึกมากกว่า 15 วัน ต้องการบันทึกต่อหรือไม่?"
+                    );
+
+
+                if (!confirmLong) {
+
+                    return;
+
+                }
+
+            }
+
+
+            const periods =
+                getPeriods();
+
+
+            periods.push({
+
+                id:
+                    Date.now(),
+
+                start,
+
+                end,
+
+                createdAt:
+                    new Date().toISOString()
+
+            });
+
+
+            savePeriods(periods);
+
+
+            closeModal();
+
+            updateDashboard();
+
+        }
+
+
+        /* =========================
+           OTHER BUTTONS
+        ========================= */
+
+        function goCalendar() {
+
+    window.location.href = "calendar.html";
+
+         }
+
+
+        function showStats() {
+
+    window.location.href = "stats.html";
+
+         }
+
+
+        function showPrivateInfo() {
+
+            alert(
+                "🔒 Bloom ใช้โหมดส่วนตัว\n\n" +
+                "ข้อมูลรอบเดือนถูกเก็บไว้ใน Browser ของอุปกรณ์นี้ด้วย localStorage\n\n" +
+                "ไม่มีระบบบัญชีและไม่มีการ Login"
+            );
+
+        }
+
+
+
+        /* =========================
+           DAILY SYMPTOMS
+        ========================= */
+        const SYMPTOM_KEY = "bloom_symptoms";
+        const SYMPTOMS = [
+            ["cramp","😣 ปวดท้อง"],
+            ["headache","🤕 ปวดหัว"],
+            ["tired","😴 เหนื่อย/ง่วง"],
+            ["back","🩹 ปวดหลัง"],
+            ["mood","🌧️ อารมณ์แปรปรวน"],
+            ["normal","🙂 อารมณ์ปกติ"]
+        ];
+        let selectedSymptoms = new Set();
+
+        function getSymptoms() {
+            try { return JSON.parse(localStorage.getItem(SYMPTOM_KEY) || "{}"); }
+            catch { return {}; }
+        }
+        function symptomLabels(keys) {
+            return keys.map(k => (SYMPTOMS.find(x => x[0] === k) || [k,k])[1]);
+        }
+        function renderSymptomOptions() {
+            const box=document.getElementById("symptomOptions");
+            if(!box) return;
+            box.innerHTML=SYMPTOMS.map(([key,label]) => `<button type="button" class="symptom-option ${selectedSymptoms.has(key)?'selected':''}" onclick="toggleSymptom('${key}')">${label}</button>`).join("");
+        }
+        function toggleSymptom(key) {
+            selectedSymptoms.has(key) ? selectedSymptoms.delete(key) : selectedSymptoms.add(key);
+            renderSymptomOptions();
+        }
+        function openSymptomModal(dateValue) {
+            const modal=document.getElementById("symptomModal");
+            const input=document.getElementById("symptomDate");
+            const date=dateValue || new Date().toISOString().split("T")[0];
+            input.value=date;
+            const all=getSymptoms();
+            selectedSymptoms=new Set(all[date] || []);
+            renderSymptomOptions();
+            modal.classList.add("show");
+        }
+        function closeSymptomModal() { document.getElementById("symptomModal")?.classList.remove("show"); }
+        function saveSymptoms() {
+            const date=document.getElementById("symptomDate").value;
+            if(!date) return;
+            const all=getSymptoms();
+            if(selectedSymptoms.size) all[date]=Array.from(selectedSymptoms);
+            else delete all[date];
+            localStorage.setItem(SYMPTOM_KEY, JSON.stringify(all));
+            closeSymptomModal();
+            alert("บันทึกอาการเรียบร้อยแล้ว");
+        }
+        document.getElementById("symptomModal")?.addEventListener("click", function(e){ if(e.target===this) closeSymptomModal(); });
+
+
+        /* =========================
+           MODAL CLICK OUTSIDE
+        ========================= */
+
+        document
+            .getElementById("modal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target === this
+                    ) {
+
+                        closeModal();
+
+                    }
+
+                }
+            );
+
+
+        /* =========================
+           START
+        ========================= */
+
+        updateToday();
+
+        updateDashboard();
+
+    
+
+function goSettings() {
+    window.location.href = "settings.html";
+}
+
+</script>
+
+
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (error) {
+            console.log("Bloom service worker error:", error);
+        });
+    });
+}
+</script>
+
+</body>
+
+</html>
