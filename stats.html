@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Bloom — สถิติ</title>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --pink: #d25f89;
+    --pink-dark: #b84e77;
+    --pink-light: #fce9f0;
+
+    --purple: #8d76c9;
+    --purple-light: #eeeafb;
+
+    --blue-light: #eaf2fb;
+
+    --text: #302832;
+    --soft: #786c75;
+    --muted: #aaa0a7;
+
+    --bg: #fcfafb;
+    --white: #ffffff;
+
+    --border: #eee6eb;
+
+}
+
+
+body {
+
+    font-family:
+        "Noto Sans Thai",
+        "DM Sans",
+        sans-serif;
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 90% 0%,
+            #f3eafa,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 0% 30%,
+            #fcebf1,
+            transparent 25%
+        ),
+
+        var(--bg);
+
+}
+
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+
+    width: 90%;
+    max-width: 1100px;
+
+    height: 78px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+
+.logo {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+
+.logo-icon {
+
+    width: 36px;
+    height: 36px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #d7648d,
+            #9c79cf
+        );
+
+}
+
+
+.back-btn {
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    color: var(--soft);
+
+    padding: 9px 15px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: .2s;
+
+}
+
+
+.back-btn:hover {
+
+    background: #fff8fb;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+
+    width: 90%;
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding-bottom: 120px;
+
+}
+
+
+.page-title {
+
+    padding-top: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.page-title small {
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.page-title h1 {
+
+    margin-top: 5px;
+
+    font-family:
+        "DM Sans",
+        "Noto Sans Thai",
+        sans-serif;
+
+    font-size: 35px;
+
+    letter-spacing: -1px;
+
+}
+
+
+.page-title p {
+
+    margin-top: 5px;
+
+    color: var(--soft);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stat-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+}
+
+
+.stat-card {
+
+    padding: 21px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 21px;
+
+}
+
+
+.stat-icon {
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: var(--pink-light);
+
+}
+
+
+.stat-card:nth-child(2)
+.stat-icon {
+
+    background: var(--purple-light);
+
+}
+
+
+.stat-card:nth-child(3)
+.stat-icon {
+
+    background: var(--blue-light);
+
+}
+
+
+.stat-card:nth-child(4)
+.stat-icon {
+
+    background: #f8efe2;
+
+}
+
+
+.stat-label {
+
+    margin-top: 15px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+.stat-value {
+
+    margin-top: 3px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+}
+
+
+.stat-unit {
+
+    font-size: 11px;
+
+    color: var(--soft);
+
+    font-weight: 500;
+
+}
+
+
+/* =========================
+   CHART
+========================= */
+
+.chart-card {
+
+    margin-top: 18px;
+
+    padding: 27px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+}
+
+
+.card-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.card-header h2 {
+
+    font-size: 17px;
+
+}
+
+
+.card-header span {
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+.chart-wrapper {
+
+    position: relative;
+
+    height: 310px;
+
+    margin-top: 25px;
+
+    padding-left: 42px;
+
+    padding-bottom: 35px;
+
+}
+
+
+.chart-area {
+
+    position: absolute;
+
+    left: 42px;
+    right: 0;
+
+    top: 0;
+    bottom: 35px;
+
+    border-left: 1px solid #eee7eb;
+
+    border-bottom: 1px solid #eee7eb;
+
+}
+
+
+/* horizontal lines */
+
+.chart-line {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    border-top: 1px dashed #eee7eb;
+
+}
+
+
+.chart-line span {
+
+    position: absolute;
+
+    right: calc(100% + 9px);
+
+    top: -7px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    white-space: nowrap;
+
+}
+
+
+/* bars */
+
+.bars {
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    padding: 10px 15px 0;
+
+}
+
+
+.bar-group {
+
+    height: 100%;
+
+    flex: 1;
+
+    max-width: 70px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+}
+
+
+.bar-value {
+
+    margin-bottom: 5px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 10px;
+
+    color: var(--soft);
+
+}
+
+
+.bar {
+
+    width: 30px;
+
+    max-height: 220px;
+
+    min-height: 4px;
+
+    border-radius:
+        8px 8px 3px 3px;
+
+    background:
+
+        linear-gradient(
+            to top,
+            #d25f89,
+            #e8a1ba
+        );
+
+    transition: .3s;
+
+}
+
+
+.bar:hover {
+
+    transform: translateY(-3px);
+
+}
+
+
+.bar-label {
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =========================
+   INSIGHT
+========================= */
+
+.insight {
+
+    margin-top: 18px;
+
+    padding: 21px 23px;
+
+    border-radius: 19px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff4f8,
+            #f8f4ff
+        );
+
+    border: 1px solid #f0e5ec;
+
+}
+
+
+.insight-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-weight: 700;
+
+    font-size: 13px;
+
+}
+
+
+.insight p {
+
+    margin-top: 7px;
+
+    color: var(--soft);
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+.history-card {
+
+    margin-top: 18px;
+
+    padding: 27px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+}
+
+
+.history-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 18px;
+
+}
+
+
+.history-table th {
+
+    text-align: left;
+
+    padding: 12px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+
+.history-table td {
+
+    padding: 14px 12px;
+
+    font-size: 11px;
+
+    border-bottom:
+        1px solid #f5eff2;
+
+}
+
+
+.history-table tr:last-child td {
+
+    border-bottom: 0;
+
+}
+
+
+.date-cell {
+
+    font-weight: 600;
+
+}
+
+
+.duration {
+
+    color: var(--pink-dark);
+
+    font-weight: 600;
+
+}
+
+
+.cycle {
+
+    color: var(--purple);
+
+    font-weight: 600;
+
+}
+
+
+.no-data {
+
+    padding: 45px 15px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   NAV
+========================= */
+
+.bottom-nav {
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    width: min(570px, 90%);
+
+    padding: 9px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 5px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 15px 45px
+        rgba(60,45,55,.13);
+
+    backdrop-filter: blur(15px);
+
+    z-index: 50;
+
+}
+
+
+.nav-item {
+
+    padding: 9px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    border-radius: 13px;
+
+    cursor: pointer;
+
+    font-size: 9px;
+
+}
+
+
+.nav-item span:first-child {
+
+    font-size: 17px;
+
+}
+
+
+.nav-item.active {
+
+    color: var(--pink);
+
+    background: var(--pink-light);
+
+    font-weight: 600;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .stat-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .header,
+    .container {
+
+        width: 92%;
+
+    }
+
+
+    .page-title h1 {
+
+        font-size: 29px;
+
+    }
+
+
+    .stat-grid {
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+    }
+
+
+    .stat-card {
+
+        padding: 16px;
+
+    }
+
+
+    .stat-value {
+
+        font-size: 21px;
+
+    }
+
+
+    .chart-card,
+    .history-card {
+
+        padding: 19px;
+
+    }
+
+
+    .chart-wrapper {
+
+        height: 260px;
+
+    }
+
+
+    .bar {
+
+        width: 22px;
+
+    }
+
+
+    .history-table th,
+    .history-table td {
+
+        padding: 10px 6px;
+
+    }
+
+}
+
+
+@media (max-width: 430px) {
+
+    .stat-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .history-table th:nth-child(3),
+    .history-table td:nth-child(3) {
+
+        display: none;
+
+    }
+
+
+    .chart-wrapper {
+
+        padding-left: 30px;
+
+    }
+
+
+    .chart-area {
+
+        left: 30px;
+
+    }
+
+}
+
+
+/* =========================
+   BLOOM DARK MODE
+   เพิ่มเฉพาะการตั้งค่าธีม
+========================= */
+
+html.dark-mode body {
+    --bg: #17141a;
+    --white: #211d24;
+    --text: #f4edf2;
+    --soft: #c0b4bd;
+    --muted: #938790;
+    --border: #352d36;
+    background:
+        radial-gradient(circle at 90% 0%, #30253a, transparent 30%),
+        radial-gradient(circle at 0% 30%, #38242e, transparent 25%),
+        var(--bg);
+    color: var(--text);
+}
+
+html.dark-mode .next-card,
+html.dark-mode .actions-card,
+html.dark-mode .stat,
+html.dark-mode .history-card,
+html.dark-mode .calendar-card,
+html.dark-mode .summary-card,
+html.dark-mode .chart-card,
+html.dark-mode .stat-card,
+html.dark-mode .modal {
+    background: #211d24;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .period-info,
+html.dark-mode .history-item,
+html.dark-mode .day,
+html.dark-mode .action,
+html.dark-mode .back-btn,
+html.dark-mode .month-btn,
+html.dark-mode .private-badge,
+html.dark-mode .form-group input,
+html.dark-mode .close-btn,
+html.dark-mode .cancel-btn {
+    background: #29232c;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .bottom-nav {
+    background: rgba(33,29,36,.94);
+    border-color: var(--border);
+}
+
+html.dark-mode .action:hover,
+html.dark-mode .back-btn:hover,
+html.dark-mode .month-btn:hover {
+    background: #302832;
+}
+
+html.dark-mode .ring::before {
+    background: #211d24;
+}
+
+html.dark-mode .day.other-month {
+    opacity: .18;
+}
+
+html.dark-mode .legend-today {
+    background: #211d24;
+}
+
+html.dark-mode .insight {
+    background: linear-gradient(135deg, #30232b, #28243a);
+    border-color: #3c3039;
+}
+
+html.dark-mode .chart-area {
+    border-color: #403640;
+}
+
+html.dark-mode .chart-line {
+    border-color: #403640;
+}
+
+html.dark-mode .history-table th {
+    border-color: var(--border);
+}
+
+html.dark-mode .history-table td {
+    border-color: #332b34;
+}
+
+html.dark-mode .modal-overlay {
+    background: rgba(0,0,0,.58);
+}
+
+html.dark-mode .notice {
+    background: #342d22;
+    color: #d7bd8a;
+}
+
+/* index.html */
+html.dark-mode .period-card,
+html.dark-mode .floating {
+    background: rgba(33,29,36,.96);
+    border-color: #3a323b;
+    color: var(--text);
+}
+
+html.dark-mode .period-info {
+    background: #29232c;
+}
+
+html.dark-mode .calendar .days {
+    color: #d8cdd5;
+}
+
+html.dark-mode footer {
+    border-color: var(--border);
+}
+
+html.dark-mode .feature,
+html.dark-mode .cta {
+    background: #211d24;
+    border-color: #352d36;
+}
+
+html.dark-mode .secondary-btn {
+    background: #29232c;
+    border-color: #413742;
+    color: var(--text);
+}
+
+html.dark-mode .nav-login {
+    background: #29232c;
+    border-color: #413742;
+    color: var(--text);
+}
+
+/* settings page */
+html.dark-mode .settings-card,
+html.dark-mode .setting-row,
+html.dark-mode .privacy-card {
+    background: #211d24;
+    border-color: var(--border);
+}
+
+html.dark-mode .theme-option {
+    background: #29232c;
+    border-color: #403640;
+    color: var(--text);
+}
+
+html.dark-mode .theme-option.active {
+    border-color: var(--pink);
+    background: #342630;
+}
+
+html.dark-mode .danger-btn {
+    background: #39272d;
+    color: #f0b8c8;
+}
+
+    </style>
+<script>
+(function () {
+    const theme =
+        localStorage.getItem("bloom_theme") || "light";
+
+    if (theme === "dark") {
+        document.documentElement.classList.add("dark-mode");
+    }
+})();
+</script>
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#d25f89">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ✿
+        </div>
+
+        Bloom
+
+    </div>
+
+
+    <button
+        class="back-btn"
+        onclick="goDashboard()"
+    >
+        ← Dashboard
+    </button>
+
+</header>
+
+
+
+<main class="container">
+
+
+<section class="page-title">
+
+    <small>
+        BLOOM STATISTICS
+    </small>
+
+    <h1>
+        สถิติรอบเดือน
+    </h1>
+
+    <p>
+        ดูข้อมูลย้อนหลังและรูปแบบรอบเดือนของคุณ
+    </p>
+
+</section>
+
+
+
+<!-- STAT CARDS -->
+
+<section class="stat-grid">
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🔄
+        </div>
+
+        <div class="stat-label">
+            รอบเฉลี่ย
+        </div>
+
+        <div
+            class="stat-value"
+            id="averageCycle"
+        >
+            —
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🩸
+        </div>
+
+        <div class="stat-label">
+            ระยะมีประจำเดือนเฉลี่ย
+        </div>
+
+        <div
+            class="stat-value"
+            id="averageDuration"
+        >
+            —
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📉
+        </div>
+
+        <div class="stat-label">
+            รอบสั้นที่สุด
+        </div>
+
+        <div
+            class="stat-value"
+            id="shortestCycle"
+        >
+            —
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📈
+        </div>
+
+        <div class="stat-label">
+            รอบยาวที่สุด
+        </div>
+
+        <div
+            class="stat-value"
+            id="longestCycle"
+        >
+            —
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- CHART -->
+
+<section class="chart-card">
+
+
+    <div class="card-header">
+
+        <h2>
+            ความยาวรอบย้อนหลัง
+        </h2>
+
+        <span>
+            CYCLE LENGTH
+        </span>
+
+    </div>
+
+
+    <div
+        class="chart-wrapper"
+        id="chartWrapper"
+    >
+
+        <div class="chart-area">
+
+            <div
+                class="chart-line"
+                style="top:0%"
+            >
+                <span>40</span>
+            </div>
+
+
+            <div
+                class="chart-line"
+                style="top:25%"
+            >
+                <span>30</span>
+            </div>
+
+
+            <div
+                class="chart-line"
+                style="top:50%"
+            >
+                <span>20</span>
+            </div>
+
+
+            <div
+                class="chart-line"
+                style="top:75%"
+            >
+                <span>10</span>
+            </div>
+
+
+            <div
+                class="chart-line"
+                style="top:100%"
+            >
+                <span>0</span>
+            </div>
+
+
+            <div
+                class="bars"
+                id="bars"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- INSIGHT -->
+
+<section class="insight">
+
+    <div class="insight-title">
+
+        <span>💡</span>
+
+        <span>
+            ภาพรวมข้อมูล
+        </span>
+
+    </div>
+
+
+    <p id="insightText">
+
+        กำลังคำนวณข้อมูล...
+
+    </p>
+
+</section>
+
+
+
+<!-- HISTORY -->
+
+<section class="history-card">
+
+
+    <div class="card-header">
+
+        <h2>
+            ประวัติรายละเอียด
+        </h2>
+
+        <span>
+            HISTORY
+        </span>
+
+    </div>
+
+
+    <div id="historyContainer">
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- NAV -->
+
+<nav class="bottom-nav">
+
+
+    <button
+        class="nav-item"
+        onclick="goDashboard()"
+    >
+
+        <span>⌂</span>
+
+        <span>
+            หน้าหลัก
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="goCalendar()"
+    >
+
+        <span>▣</span>
+
+        <span>
+            ปฏิทิน
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item active"
+    >
+
+        <span>◈</span>
+
+        <span>
+            สถิติ
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="goSettings()"
+    >
+
+        <span>⚙</span>
+
+        <span>
+            ตั้งค่า
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+
+<script>
+
+
+/* =========================
+   STORAGE
+========================= */
+
+const STORAGE_KEY =
+    "bloom_periods";
+
+
+function getPeriods() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                STORAGE_KEY
+            )
+        ) || [];
+
+    }
+
+    catch {
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function parseDate(value) {
+
+    const parts =
+        value
+            .split("-")
+            .map(Number);
+
+    return new Date(
+        parts[0],
+        parts[1] - 1,
+        parts[2]
+    );
+
+}
+
+
+function diffDays(a, b) {
+
+    const first =
+        new Date(
+            a.getFullYear(),
+            a.getMonth(),
+            a.getDate()
+        );
+
+
+    const second =
+        new Date(
+            b.getFullYear(),
+            b.getMonth(),
+            b.getDate()
+        );
+
+
+    return Math.round(
+        (second - first) /
+        86400000
+    );
+
+}
+
+
+function formatDate(date) {
+
+    return date.toLocaleDateString(
+        "th-TH",
+        {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================
+   BUILD DATA
+========================= */
+
+function buildData() {
+
+    const periods =
+        getPeriods();
+
+
+    const sorted =
+        [...periods].sort(
+            (a,b) =>
+                parseDate(a.start) -
+                parseDate(b.start)
+        );
+
+
+    const result = [];
+
+
+    for (
+        let i = 0;
+        i < sorted.length;
+        i++
+    ) {
+
+        const current =
+            sorted[i];
+
+
+        const duration =
+            diffDays(
+                parseDate(current.start),
+                parseDate(current.end)
+            ) + 1;
+
+
+        let cycle = null;
+
+
+        if (i > 0) {
+
+            cycle =
+                diffDays(
+                    parseDate(
+                        sorted[i - 1].start
+                    ),
+                    parseDate(
+                        current.start
+                    )
+                );
+
+
+            if (
+                cycle <= 0 ||
+                cycle >= 100
+            ) {
+
+                cycle = null;
+
+            }
+
+        }
+
+
+        result.push({
+
+            start:
+                parseDate(
+                    current.start
+                ),
+
+            end:
+                parseDate(
+                    current.end
+                ),
+
+            duration,
+
+            cycle
+
+        });
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================
+   UPDATE STATS
+========================= */
+
+function updateStats() {
+
+    const data =
+        buildData();
+
+
+    const cycles =
+        data
+            .map(item => item.cycle)
+            .filter(
+                value =>
+                    value !== null
+            );
+
+
+    const durations =
+        data.map(
+            item =>
+                item.duration
+        );
+
+
+    /* average cycle */
+
+    if (cycles.length) {
+
+        const average =
+            Math.round(
+                cycles.reduce(
+                    (a,b) => a + b,
+                    0
+                ) /
+                cycles.length
+            );
+
+
+        document.getElementById(
+            "averageCycle"
+        ).textContent =
+            average + " วัน";
+
+    }
+
+
+    else {
+
+        document.getElementById(
+            "averageCycle"
+        ).textContent =
+            "28 วัน*";
+
+    }
+
+
+    /* average duration */
+
+    if (durations.length) {
+
+        const average =
+            Math.round(
+                (
+                    durations.reduce(
+                        (a,b) =>
+                            a + b,
+                        0
+                    ) /
+                    durations.length
+                ) * 10
+            ) / 10;
+
+
+        document.getElementById(
+            "averageDuration"
+        ).textContent =
+            average + " วัน";
+
+    }
+
+
+    /* shortest */
+
+    if (cycles.length) {
+
+        document.getElementById(
+            "shortestCycle"
+        ).textContent =
+            Math.min(
+                ...cycles
+            ) + " วัน";
+
+    }
+
+
+    /* longest */
+
+    if (cycles.length) {
+
+        document.getElementById(
+            "longestCycle"
+        ).textContent =
+            Math.max(
+                ...cycles
+            ) + " วัน";
+
+    }
+
+
+    renderChart(data);
+
+    renderHistory(data);
+
+    renderInsight(
+        data,
+        cycles,
+        durations
+    );
+
+}
+
+
+/* =========================
+   CHART
+========================= */
+
+function renderChart(data) {
+
+    const bars =
+        document.getElementById(
+            "bars"
+        );
+
+
+    const usable =
+        data.filter(
+            item =>
+                item.cycle !== null
+        );
+
+
+    if (!usable.length) {
+
+        bars.innerHTML = `
+            <div
+                style="
+                    width:100%;
+                    text-align:center;
+                    color:#aaa0a7;
+                    font-size:11px;
+                    align-self:center;
+                "
+            >
+                ต้องมีข้อมูลอย่างน้อย 2 รอบ
+                เพื่อแสดงกราฟ
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    /*
+        แสดงล่าสุดไม่เกิน 8 รอบ
+    */
+
+    const latest =
+        usable.slice(-8);
+
+
+    const maxScale = 40;
+
+
+    bars.innerHTML =
+        latest.map(
+            item => {
+
+                const height =
+                    Math.max(
+                        5,
+                        Math.min(
+                            100,
+                            (
+                                item.cycle /
+                                maxScale
+                            ) * 100
+                        )
+                    );
+
+
+                const label =
+                    item.start.toLocaleDateString(
+                        "th-TH",
+                        {
+                            day: "numeric",
+                            month: "short"
+                        }
+                    );
+
+
+                return `
+
+                    <div
+                        class="bar-group"
+                    >
+
+                        <div
+                            class="bar-value"
+                        >
+                            ${item.cycle}
+                        </div>
+
+                        <div
+                            class="bar"
+                            style="
+                                height:
+                                ${height}%;
+                            "
+                            title="
+                                ${item.cycle}
+                                วัน
+                            "
+                        ></div>
+
+                        <div
+                            class="bar-label"
+                        >
+                            ${label}
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================
+   HISTORY TABLE
+========================= */
+
+function renderHistory(data) {
+
+    const container =
+        document.getElementById(
+            "historyContainer"
+        );
+
+
+    if (!data.length) {
+
+        container.innerHTML = `
+
+            <div class="no-data">
+
+                🌸
+
+                <br><br>
+
+                ยังไม่มีข้อมูลรอบเดือน
+
+                <br>
+
+                กลับไป Dashboard
+                เพื่อบันทึกข้อมูล
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const rows =
+        [...data]
+            .reverse()
+            .map(
+                (item,index) => `
+
+                    <tr>
+
+                        <td class="date-cell">
+
+                            ${formatDate(
+                                item.start
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            ${formatDate(
+                                item.end
+                            )}
+
+                        </td>
+
+
+                        <td class="duration">
+
+                            ${item.duration}
+                            วัน
+
+                        </td>
+
+
+                        <td class="cycle">
+
+                            ${
+                                item.cycle
+                                ?
+                                item.cycle +
+                                " วัน"
+                                :
+                                "—"
+                            }
+
+                        </td>
+
+                    </tr>
+
+                `
+            )
+            .join("");
+
+
+    container.innerHTML = `
+
+        <div
+            style="
+                overflow-x:auto;
+            "
+        >
+
+            <table
+                class="history-table"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            วันเริ่ม
+                        </th>
+
+                        <th>
+                            วันสิ้นสุด
+                        </th>
+
+                        <th>
+                            ระยะเวลา
+                        </th>
+
+                        <th>
+                            ความยาวรอบ
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    ${rows}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   INSIGHT
+========================= */
+
+function renderInsight(
+    data,
+    cycles,
+    durations
+) {
+
+    const element =
+        document.getElementById(
+            "insightText"
+        );
+
+
+    if (!data.length) {
+
+        element.textContent =
+            "เมื่อคุณเริ่มบันทึกรอบเดือน Bloom จะนำข้อมูลย้อนหลังมาคำนวณสถิติให้โดยอัตโนมัติ";
+
+        return;
+
+    }
+
+
+    if (data.length === 1) {
+
+        element.textContent =
+            "ตอนนี้มีข้อมูล 1 รอบ ระบบสามารถคำนวณระยะเวลามีประจำเดือนได้แล้ว แต่ต้องมีอย่างน้อย 2 รอบจึงจะคำนวณความยาวรอบระหว่างแต่ละรอบได้";
+
+        return;
+
+    }
+
+
+    const average =
+        Math.round(
+            cycles.reduce(
+                (a,b) => a + b,
+                0
+            ) /
+            cycles.length
+        );
+
+
+    const shortest =
+        Math.min(...cycles);
+
+
+    const longest =
+        Math.max(...cycles);
+
+
+    const difference =
+        longest -
+        shortest;
+
+
+    if (difference <= 3) {
+
+        element.textContent =
+            `จากข้อมูลที่บันทึกไว้ ความยาวรอบอยู่ในช่วง ${shortest}-${longest} วัน และค่าเฉลี่ยประมาณ ${average} วัน`;
+
+    }
+
+    else {
+
+        element.textContent =
+            `จากข้อมูลที่บันทึกไว้ ความยาวรอบอยู่ในช่วง ${shortest}-${longest} วัน โดยมีค่าเฉลี่ยประมาณ ${average} วัน รอบแต่ละเดือนอาจแตกต่างกันได้`;
+
+    }
+
+}
+
+
+/* =========================
+   NAV
+========================= */
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+function goCalendar() {
+
+    window.location.href =
+        "calendar.html";
+
+}
+
+
+function showInfo() {
+
+    alert(
+        "🔒 Bloom ใช้โหมดส่วนตัว\n\n" +
+        "ข้อมูลทั้งหมดถูกเก็บไว้ใน Browser ของอุปกรณ์นี้\n\n" +
+        "ไม่มีระบบ Login และไม่มีบัญชีผู้ใช้"
+    );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+updateStats();
+
+
+
+function goSettings() {
+    window.location.href = "settings.html";
+}
+
+</script>
+
+
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (error) {
+            console.log("Bloom service worker error:", error);
+        });
+    });
+}
+</script>
+
+</body>
+
+</html>
