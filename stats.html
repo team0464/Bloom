@@ -2133,22 +2133,6 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<script>
-/* =========================
-   SYMPTOM SUMMARY
-========================= */
-function renderSymptomSummary(){
-    const box=document.getElementById("symptomSummary"); if(!box)return;
-    let data={}; try{data=JSON.parse(localStorage.getItem("bloom_symptoms")||"{}")}catch{}
-    const counts={};
-    Object.values(data).forEach(arr=>(arr||[]).forEach(k=>counts[k]=(counts[k]||0)+1));
-    const labels={cramp:"😣 ปวดท้อง",headache:"🤕 ปวดหัว",tired:"😴 เหนื่อย/ง่วง",back:"🩹 ปวดหลัง",mood:"🌧️ อารมณ์แปรปรวน",normal:"🙂 อารมณ์ปกติ"};
-    const rows=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
-    box.innerHTML=rows.length?rows.map(([k,v])=>`<div class="history-item"><div class="history-left"><div class="history-icon">${labels[k]?.slice(0,2)||'📝'}</div><div class="history-date"><strong>${labels[k]||k}</strong><small>บันทึก ${v} วัน</small></div></div><div class="history-duration">${v} ครั้ง</div></div>`).join(""):'<div class="no-history">ยังไม่มีข้อมูลอาการ</div>';
-}
-renderSymptomSummary();
-
-</script>
 </body>
 
 </html>

@@ -874,24 +874,185 @@
 
         }
 
+    
+/* =========================
+   BLOOM DARK MODE
+   เพิ่มเฉพาะการตั้งค่าธีม
+========================= */
+
+html.dark-mode body {
+    --bg: #17141a;
+    --white: #211d24;
+    --text: #f4edf2;
+    --soft: #c0b4bd;
+    --muted: #938790;
+    --border: #352d36;
+    background:
+        radial-gradient(circle at 90% 0%, #30253a, transparent 30%),
+        radial-gradient(circle at 0% 30%, #38242e, transparent 25%),
+        var(--bg);
+    color: var(--text);
+}
+
+html.dark-mode .next-card,
+html.dark-mode .actions-card,
+html.dark-mode .stat,
+html.dark-mode .history-card,
+html.dark-mode .calendar-card,
+html.dark-mode .summary-card,
+html.dark-mode .chart-card,
+html.dark-mode .stat-card,
+html.dark-mode .modal {
+    background: #211d24;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .period-info,
+html.dark-mode .history-item,
+html.dark-mode .day,
+html.dark-mode .action,
+html.dark-mode .back-btn,
+html.dark-mode .month-btn,
+html.dark-mode .private-badge,
+html.dark-mode .form-group input,
+html.dark-mode .close-btn,
+html.dark-mode .cancel-btn {
+    background: #29232c;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+html.dark-mode .bottom-nav {
+    background: rgba(33,29,36,.94);
+    border-color: var(--border);
+}
+
+html.dark-mode .action:hover,
+html.dark-mode .back-btn:hover,
+html.dark-mode .month-btn:hover {
+    background: #302832;
+}
+
+html.dark-mode .ring::before {
+    background: #211d24;
+}
+
+html.dark-mode .day.other-month {
+    opacity: .18;
+}
+
+html.dark-mode .legend-today {
+    background: #211d24;
+}
+
+html.dark-mode .insight {
+    background: linear-gradient(135deg, #30232b, #28243a);
+    border-color: #3c3039;
+}
+
+html.dark-mode .chart-area {
+    border-color: #403640;
+}
+
+html.dark-mode .chart-line {
+    border-color: #403640;
+}
+
+html.dark-mode .history-table th {
+    border-color: var(--border);
+}
+
+html.dark-mode .history-table td {
+    border-color: #332b34;
+}
+
+html.dark-mode .modal-overlay {
+    background: rgba(0,0,0,.58);
+}
+
+html.dark-mode .notice {
+    background: #342d22;
+    color: #d7bd8a;
+}
+
+/* index.html */
+html.dark-mode .period-card,
+html.dark-mode .floating {
+    background: rgba(33,29,36,.96);
+    border-color: #3a323b;
+    color: var(--text);
+}
+
+html.dark-mode .period-info {
+    background: #29232c;
+}
+
+html.dark-mode .calendar .days {
+    color: #d8cdd5;
+}
+
+html.dark-mode footer {
+    border-color: var(--border);
+}
+
+html.dark-mode .feature,
+html.dark-mode .cta {
+    background: #211d24;
+    border-color: #352d36;
+}
+
+html.dark-mode .secondary-btn {
+    background: #29232c;
+    border-color: #413742;
+    color: var(--text);
+}
+
+html.dark-mode .nav-login {
+    background: #29232c;
+    border-color: #413742;
+    color: var(--text);
+}
+
+/* settings page */
+html.dark-mode .settings-card,
+html.dark-mode .setting-row,
+html.dark-mode .privacy-card {
+    background: #211d24;
+    border-color: var(--border);
+}
+
+html.dark-mode .theme-option {
+    background: #29232c;
+    border-color: #403640;
+    color: var(--text);
+}
+
+html.dark-mode .theme-option.active {
+    border-color: var(--pink);
+    background: #342630;
+}
+
+html.dark-mode .danger-btn {
+    background: #39272d;
+    color: #f0b8c8;
+}
+
     </style>
-
 <script>
-
 (function () {
-
     const theme =
         localStorage.getItem("bloom_theme") || "light";
 
     if (theme === "dark") {
-
         document.documentElement.classList.add("dark-mode");
-
     }
-
 })();
-
 </script>
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#d25f89">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 </head>
 
@@ -1176,7 +1337,7 @@
 
         <button
             class="nav-item"
-            onclick="showInfo()"
+            onclick="goSettings()"
         >
 
             <span>⚙</span>
@@ -1379,16 +1540,14 @@
 
             const averageCycle =
                 cycles.length
-                    ?
-                    Math.round(
+                    ? Math.round(
                         cycles.reduce(
                             (a, b) =>
                                 a + b,
                             0
                         ) / cycles.length
                     )
-                    :
-                    28;
+                    : 28;
 
 
             const latest =
@@ -1915,7 +2074,6 @@
 
             window.location.href =
                 "stats.html";
-
         }
 
 
@@ -1937,8 +2095,25 @@
 
         renderCalendar();
 
-    </script>
+    
 
+function goSettings() {
+    window.location.href = "settings.html";
+}
+
+</script>
+
+
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (error) {
+            console.log("Bloom service worker error:", error);
+        });
+    });
+}
+</script>
 
 </body>
 

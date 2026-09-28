@@ -631,11 +631,10 @@ function exportData() {
 
     const backup = {
         app: "Bloom",
-        version: 2,
+        version: 1,
         exportedAt: new Date().toISOString(),
         bloom_periods: JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"),
-        bloom_theme: localStorage.getItem(THEME_KEY) || "light",
-        bloom_symptoms: JSON.parse(localStorage.getItem("bloom_symptoms") || "{}")
+        bloom_theme: localStorage.getItem(THEME_KEY) || "light"
     };
 
     const blob = new Blob(
@@ -686,9 +685,6 @@ function importData(event) {
             }
 
             localStorage.setItem(STORAGE_KEY, JSON.stringify(backup.bloom_periods));
-            if (backup.bloom_symptoms && typeof backup.bloom_symptoms === "object") {
-                localStorage.setItem("bloom_symptoms", JSON.stringify(backup.bloom_symptoms));
-            }
 
             if (backup.bloom_theme === "dark" || backup.bloom_theme === "light") {
                 localStorage.setItem(THEME_KEY, backup.bloom_theme);
@@ -743,7 +739,6 @@ function clearAllData() {
     }
 
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem("bloom_symptoms");
 
     alert("ล้างข้อมูลรอบเดือนเรียบร้อยแล้ว");
 

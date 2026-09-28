@@ -4,1455 +4,757 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bloom — ปฏิทิน</title>
+<title>Bloom — Dashboard</title>
 
-<link rel="manifest" href="./manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#d25f89">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --pink:#d25f89;
-    --pink-dark:#b84e77;
-    --pink-light:#fce9f0;
-
-    --purple:#8d76c9;
-    --purple-light:#eeeafb;
-
-    --text:#302832;
-    --soft:#786c75;
-    --muted:#aaa0a7;
-
-    --bg:#fcfafb;
-    --white:#ffffff;
-    --border:#eee6eb;
 }
 
 body{
-    font-family:
-        "Noto Sans Thai",
-        "DM Sans",
-        sans-serif;
-
-    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",
+                 "Noto Sans Thai",sans-serif;
+    background:linear-gradient(135deg,#fff7fb,#f7f2ff);
+    color:#4a3c43;
     min-height:100vh;
-
-    background:
-        radial-gradient(
-            circle at 90% 0%,
-            #f3eafa,
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 0% 30%,
-            #fcebf1,
-            transparent 25%
-        ),
-        var(--bg);
+    padding-bottom:90px;
 }
 
-button{
-    font-family:inherit;
+.container{
+    width:92%;
+    max-width:520px;
+    margin:auto;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
-    width:90%;
-    max-width:1100px;
-    height:78px;
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    padding:28px 0 18px;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    font-family:"DM Sans",sans-serif;
-    font-size:21px;
+.header h1{
+    font-size:28px;
+    color:#c85c87;
     font-weight:700;
 }
 
-.logo-icon{
-    width:36px;
-    height:36px;
+.header p{
+    margin-top:5px;
+    color:#8c7b84;
+    font-size:14px;
+}
 
+/* CARD */
+
+.card{
+    background:rgba(255,255,255,.88);
+    border-radius:24px;
+    padding:22px;
+    margin-bottom:16px;
+    box-shadow:0 8px 25px rgba(170,110,140,.10);
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.card-title{
+    font-size:16px;
+    font-weight:700;
+    color:#604c57;
+    margin-bottom:15px;
+}
+
+/* MAIN PERIOD */
+
+.period-box{
+    text-align:center;
+    padding:8px 0 5px;
+}
+
+.period-icon{
+    width:65px;
+    height:65px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff0f6;
+    font-size:30px;
+}
+
+.period-label{
+    font-size:13px;
+    color:#927e88;
+}
+
+.period-date{
+    margin-top:5px;
+    font-size:23px;
+    font-weight:700;
+    color:#c85c87;
+}
+
+.period-sub{
+    margin-top:7px;
+    font-size:13px;
+    color:#91818a;
+}
+
+/* INFO GRID */
+
+.info-grid{
     display:grid;
-    place-items:center;
-
-    border-radius:11px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d7648d,
-            #9c79cf
-        );
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.back-btn{
-    border:1px solid var(--border);
-    background:white;
-    color:var(--soft);
-
-    padding:9px 15px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    font-size:11px;
-}
-
-.back-btn:hover{
+.info-item{
     background:#fff8fb;
+    border-radius:17px;
+    padding:15px;
 }
 
-/* =========================
-   MAIN
-========================= */
-
-.container{
-    width:90%;
-    max-width:1100px;
-
-    margin:auto;
-
-    padding-bottom:120px;
-}
-
-.page-title{
-    padding-top:25px;
-    margin-bottom:25px;
-}
-
-.page-title small{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.page-title h1{
-    margin-top:5px;
-
-    font-family:
-        "DM Sans",
-        "Noto Sans Thai",
-        sans-serif;
-
-    font-size:35px;
-
-    letter-spacing:-1px;
-}
-
-.page-title p{
-    margin-top:5px;
-
-    color:var(--soft);
+.info-label{
+    color:#927e88;
     font-size:12px;
 }
 
-/* =========================
-   CALENDAR CARD
-========================= */
-
-.calendar-card{
-    background:white;
-
-    border:1px solid var(--border);
-
-    border-radius:27px;
-
-    padding:30px;
-
-    box-shadow:
-        0 18px 50px
-        rgba(70,50,65,.06);
-}
-
-.calendar-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:25px;
-}
-
-.month-title{
-    text-align:center;
-    flex:1;
-}
-
-.month-title strong{
-    display:block;
-
-    font-family:"DM Sans",sans-serif;
-
-    font-size:22px;
-}
-
-.month-title small{
-    color:var(--muted);
-    font-size:10px;
-}
-
-.month-btn{
-    width:40px;
-    height:40px;
-
-    border-radius:12px;
-
-    border:1px solid var(--border);
-
-    background:white;
-
-    color:var(--soft);
-
-    cursor:pointer;
-
-    font-size:18px;
-}
-
-.month-btn:hover{
-    background:var(--pink-light);
-    color:var(--pink);
-}
-
-/* =========================
-   WEEK
-========================= */
-
-.weekdays{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-
-    gap:8px;
-
-    margin-bottom:8px;
-}
-
-.weekday{
-    text-align:center;
-
-    padding:8px 0;
-
-    color:var(--muted);
-
-    font-size:10px;
-    font-weight:600;
-}
-
-/* =========================
-   CALENDAR GRID
-========================= */
-
-.calendar-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(7,1fr);
-
-    gap:8px;
-}
-
-.day{
-    position:relative;
-
-    min-height:76px;
-
-    padding:10px;
-
-    border-radius:15px;
-
-    border:1px solid transparent;
-
-    background:#fdfbfc;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.day:hover{
-    transform:translateY(-1px);
-
-    border-color:#eadfe5;
-}
-
-.day-number{
-    font-family:"DM Sans",sans-serif;
-
-    font-size:13px;
-    font-weight:600;
-}
-
-.day.other-month{
-    opacity:.25;
-}
-
-.day.today{
-    border-color:var(--purple);
-}
-
-.day.today .day-number{
-    color:var(--purple);
-}
-
-/* =========================
-   PERIOD
-========================= */
-
-.day.period{
-    background:var(--pink-light);
-
-    border-color:#f4cbd9;
-}
-
-.day.period .day-number{
-    color:var(--pink-dark);
-}
-
-.period-dot{
-    position:absolute;
-
-    left:10px;
-    bottom:9px;
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:var(--pink);
-}
-
-/* =========================
-   PREDICTED
-========================= */
-
-.day.predicted{
-    background:var(--purple-light);
-
-    border-color:#d8cff1;
-}
-
-.day.predicted .day-number{
-    color:#7560ad;
-}
-
-.predicted-dot{
-    position:absolute;
-
-    left:10px;
-    bottom:9px;
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:var(--purple);
-}
-
-/* =========================
-   SYMPTOM DOT
-========================= */
-
-.symptom-marker{
-    position:absolute;
-
-    right:8px;
-    bottom:8px;
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:var(--purple);
-
-    box-shadow:
-        0 0 0 2px
-        rgba(141,118,201,.12);
-}
-
-/* =========================
-   LEGEND
-========================= */
-
-.legend{
-    display:flex;
-    flex-wrap:wrap;
-
-    gap:20px;
-
-    margin-top:24px;
-    padding-top:20px;
-
-    border-top:
-        1px solid
-        var(--border);
-}
-
-.legend-item{
-    display:flex;
-    align-items:center;
-
-    gap:7px;
-
-    color:var(--soft);
-
-    font-size:10px;
-}
-
-.legend-dot{
-    width:9px;
-    height:9px;
-
-    border-radius:50%;
-}
-
-.legend-period{
-    background:var(--pink);
-}
-
-.legend-predicted{
-    background:var(--purple);
-}
-
-.legend-today{
-    border:2px solid var(--purple);
-    background:white;
-}
-
-/* =========================
-   SUMMARY
-========================= */
-
-.summary{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:16px;
-
-    margin-top:18px;
-}
-
-.summary-card{
-    background:white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:20px;
-
-    padding:21px;
-}
-
-.summary-icon{
-    width:37px;
-    height:37px;
-
-    display:grid;
-    place-items:center;
-
-    border-radius:11px;
-
-    background:var(--pink-light);
-}
-
-.summary-card:nth-child(2)
-.summary-icon{
-    background:var(--purple-light);
-}
-
-.summary-card:nth-child(3)
-.summary-icon{
-    background:#eaf2fb;
-}
-
-.summary-label{
-    margin-top:15px;
-
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-.summary-value{
-    margin-top:4px;
-
-    font-family:"DM Sans",sans-serif;
-
-    font-size:18px;
-
+.info-value{
+    margin-top:5px;
+    color:#5b4852;
     font-weight:700;
-}
-
-/* =========================
-   BOTTOM NAV
-========================= */
-
-.bottom-nav{
-    position:fixed;
-
-    left:50%;
-    bottom:18px;
-
-    transform:
-        translateX(-50%);
-
-    width:min(570px,90%);
-
-    padding:9px;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:5px;
-
-    border-radius:20px;
-
-    background:
-        rgba(255,255,255,.94);
-
-    border:
-        1px solid
-        var(--border);
-
-    box-shadow:
-        0 15px 45px
-        rgba(60,45,55,.13);
-
-    backdrop-filter:blur(15px);
-
-    z-index:100;
-}
-
-.nav-item{
-    padding:9px;
-
-    display:flex;
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:3px;
-
-    border:0;
-
-    background:transparent;
-
-    color:var(--muted);
-
-    border-radius:13px;
-
-    cursor:pointer;
-
-    font-size:9px;
-}
-
-.nav-item span:first-child{
     font-size:17px;
 }
 
-.nav-item.active{
-    color:var(--pink);
+/* BUTTONS */
 
-    background:var(--pink-light);
-
-    font-weight:600;
-}
-
-/* =====================================================
-   IMPORTANT
-   SYMPTOM MODAL
-   ===================================================== */
-
-#symptomModal{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(48,40,50,.45);
-
-    backdrop-filter:blur(5px);
-
-    -webkit-backdrop-filter:blur(5px);
-
-    z-index:99999;
-}
-
-/*
-   เปิด Modal เฉพาะตอนมี class show
-*/
-
-#symptomModal.show{
-    display:flex !important;
-}
-
-/* =========================
-   MODAL BOX
-========================= */
-
-#symptomModal .modal{
-
-    position:relative;
-
-    width:
-        min(480px,100%);
-
-    max-height:
-        calc(100vh - 40px);
-
-    overflow-y:auto;
-
-    padding:25px;
-
-    background:#ffffff;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:24px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(40,30,40,.25);
-
-    animation:
-        bloomModalIn
-        .2s ease-out;
-}
-
-@keyframes bloomModalIn{
-
-    from{
-        opacity:0;
-
-        transform:
-            translateY(20px)
-            scale(.97);
-    }
-
-    to{
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-/* =========================
-   MODAL HEADER
-========================= */
-
-#symptomModal .modal-header{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:22px;
-}
-
-#symptomModal .modal-header h2{
-
-    font-size:20px;
-
-    color:var(--text);
-}
-
-/* =========================
-   CLOSE BUTTON
-========================= */
-
-#symptomModal .close-btn{
-
-    width:38px;
-    height:38px;
-
-    flex:0 0 38px;
-
+.action-list{
     display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
 
-    place-items:center;
-
+.action-btn{
     border:0;
-
-    border-radius:50%;
-
-    background:var(--pink-light);
-
-    color:var(--pink-dark);
-
-    font-size:25px;
-
-    line-height:1;
-
+    border-radius:18px;
+    padding:16px 10px;
+    background:#fff4f8;
+    color:#c25782;
+    font-size:14px;
+    font-weight:700;
     cursor:pointer;
+    transition:.2s;
 }
 
-#symptomModal .close-btn:hover{
-
-    background:#f8dce6;
-
+.action-btn:hover{
+    transform:translateY(-2px);
+    background:#ffeaf2;
 }
 
-/* =========================
-   FORM
-========================= */
+.action-btn span{
+    display:block;
+    font-size:24px;
+    margin-bottom:6px;
+}
 
-#symptomModal .form-group{
+/* PRIVACY */
 
+.privacy{
+    text-align:center;
+    color:#9a8992;
+    font-size:12px;
+    line-height:1.6;
+    padding:8px 20px 20px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:74px;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(15px);
+    border-top:1px solid #f0e3e8;
+    display:flex;
+    justify-content:center;
+    z-index:20;
+}
+
+.nav-inner{
+    width:100%;
+    max-width:520px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-item{
+    text-decoration:none;
+    color:#9a8992;
+    font-size:11px;
+    text-align:center;
+}
+
+.nav-item span{
+    display:block;
+    font-size:22px;
+    margin-bottom:2px;
+}
+
+.nav-item.active{
+    color:#c85c87;
+    font-weight:700;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(54,38,47,.38);
+    z-index:100;
+    align-items:flex-end;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:520px;
+    background:#fff;
+    border-radius:28px 28px 20px 20px;
+    padding:24px;
+    box-shadow:0 -10px 40px rgba(60,30,50,.15);
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     margin-bottom:20px;
 }
 
-#symptomModal .form-group label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:var(--soft);
-
-    font-size:12px;
-
-    font-weight:600;
+.modal-header h2{
+    font-size:20px;
+    color:#5b4852;
 }
 
-#symptomModal input[type="date"]{
+.close-btn{
+    width:36px;
+    height:36px;
+    border:0;
+    border-radius:50%;
+    background:#f8eef3;
+    color:#8d7380;
+    font-size:20px;
+    cursor:pointer;
+}
 
-    width:100%;
-
-    height:46px;
-
-    padding:
-        0 13px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:13px;
-
-    background:#fffafd;
-
-    color:var(--text);
-
-    font-family:inherit;
-
+.form-label{
+    display:block;
     font-size:13px;
+    color:#806d76;
+    margin-bottom:7px;
+}
 
+.date-input{
+    width:100%;
+    border:1px solid #eadde3;
+    background:#fffafd;
+    border-radius:14px;
+    padding:13px;
+    font-size:15px;
+    color:#5c4a53;
     outline:none;
 }
 
-#symptomModal input[type="date"]:focus{
-
-    border-color:var(--pink);
-
+.date-input:focus{
+    border-color:#d986a5;
 }
 
-/* =========================
-   SYMPTOM OPTIONS
-========================= */
+/* SYMPTOMS */
 
-#symptomModal .symptom-modal-options{
+.symptom-title{
+    margin-top:20px;
+    margin-bottom:10px;
+    font-size:13px;
+    color:#806d76;
+}
 
+.symptom-grid{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:10px;
-
-    margin-top:12px;
 }
 
-#symptomModal .symptom-option{
+.symptom-option{
+    position:relative;
+}
 
-    min-height:48px;
+.symptom-option input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
 
-    padding:
-        10px 8px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:13px;
-
-    background:#ffffff;
-
-    color:var(--text);
-
+.symptom-option label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 10px;
+    border:1px solid #eadde3;
+    border-radius:15px;
+    background:#fffafd;
+    color:#6e5b64;
+    font-size:13px;
     cursor:pointer;
-
-    font-family:inherit;
-
-    font-size:11px;
-
-    transition:.15s;
+    transition:.2s;
 }
 
-#symptomModal .symptom-option:hover{
-
-    border-color:var(--pink);
-
+.symptom-option input:checked + label{
+    background:#fff0f6;
+    border-color:#d985a6;
+    color:#c25782;
+    font-weight:700;
 }
 
-#symptomModal .symptom-option.selected{
-
-    border-color:var(--pink);
-
-    background:var(--pink-light);
-
-    color:var(--pink-dark);
-
-    font-weight:600;
-}
-
-/* =========================
-   SAVE BUTTON
-========================= */
-
-#symptomModal .symptom-save{
-
+.save-btn{
     width:100%;
-
-    min-height:48px;
-
-    margin-top:8px;
-
-    padding:13px;
-
     border:0;
-
-    border-radius:13px;
-
-    background:var(--pink);
-
+    border-radius:17px;
+    background:#d25f89;
     color:white;
-
+    padding:15px;
+    margin-top:20px;
+    font-size:15px;
+    font-weight:700;
     cursor:pointer;
-
-    font-family:inherit;
-
-    font-size:12px;
-
-    font-weight:600;
 }
 
-#symptomModal .symptom-save:hover{
-
-    background:var(--pink-dark);
-
+.delete-symptom-btn{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#b96d86;
+    padding:12px;
+    margin-top:5px;
+    font-size:13px;
+    cursor:pointer;
 }
 
-/* =========================
-   DARK MODE
-========================= */
+/* DARK MODE */
 
-html.dark-mode body{
-
-    --bg:#17141a;
-    --white:#211d24;
-
-    --text:#f4edf2;
-    --soft:#c0b4bd;
-    --muted:#938790;
-
-    --border:#352d36;
-
-    background:
-        radial-gradient(
-            circle at 90% 0%,
-            #30253a,
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 0% 30%,
-            #38242e,
-            transparent 25%
-        ),
-        var(--bg);
-
-    color:var(--text);
+body.dark{
+    background:linear-gradient(135deg,#211a20,#241d29);
+    color:#eee4e9;
 }
 
-html.dark-mode
-.calendar-card,
-html.dark-mode
-.summary-card{
-
-    background:#211d24;
-
-    border-color:var(--border);
-
+body.dark .header h1{
+    color:#e98caf;
 }
 
-html.dark-mode
-.day{
-
-    background:#29232c;
-
-    border-color:var(--border);
-
+body.dark .header p,
+body.dark .period-label,
+body.dark .period-sub,
+body.dark .info-label{
+    color:#bbaab2;
 }
 
-html.dark-mode
-.day:hover{
-
-    background:#302832;
-
+body.dark .card{
+    background:#2b232b;
+    border-color:#3a3039;
+    box-shadow:none;
 }
 
-html.dark-mode
-.back-btn,
-html.dark-mode
-.month-btn{
-
-    background:#29232c;
-
-    border-color:var(--border);
-
-    color:var(--text);
-
+body.dark .card-title,
+body.dark .info-value,
+body.dark .modal-header h2{
+    color:#eee4e9;
 }
 
-html.dark-mode
-.bottom-nav{
-
-    background:
-        rgba(33,29,36,.94);
-
-    border-color:var(--border);
-
+body.dark .period-icon{
+    background:#3a2630;
 }
 
-/* DARK MODAL */
-
-html.dark-mode
-#symptomModal .modal{
-
-    background:#211d24;
-
-    border-color:var(--border);
-
+body.dark .info-item{
+    background:#332932;
 }
 
-html.dark-mode
-#symptomModal{
-
-    background:
-        rgba(0,0,0,.62);
-
+body.dark .action-btn{
+    background:#382a32;
+    color:#e98caf;
 }
 
-html.dark-mode
-#symptomModal .modal-header h2{
-
-    color:var(--text);
-
+body.dark .action-btn:hover{
+    background:#46313c;
 }
 
-html.dark-mode
-#symptomModal .close-btn{
-
-    background:#392c35;
-
-    color:#f0b6c8;
-
+body.dark .privacy{
+    color:#ad9ca4;
 }
 
-html.dark-mode
-#symptomModal input[type="date"]{
-
-    background:#29232c;
-
-    border-color:var(--border);
-
-    color:var(--text);
-
+body.dark .bottom-nav{
+    background:rgba(38,30,37,.96);
+    border-color:#40333c;
 }
 
-html.dark-mode
-#symptomModal .symptom-option{
-
-    background:#29232c;
-
-    border-color:var(--border);
-
-    color:var(--text);
-
+body.dark .nav-item{
+    color:#a9959f;
 }
 
-html.dark-mode
-#symptomModal .symptom-option.selected{
-
-    background:#342630;
-
-    border-color:var(--pink);
-
-    color:#f2a0bb;
-
+body.dark .nav-item.active{
+    color:#e98caf;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-    .calendar-card{
-        padding:18px;
-    }
-
-    .calendar-grid,
-    .weekdays{
-        gap:5px;
-    }
-
-    .day{
-        min-height:58px;
-        padding:7px;
-        border-radius:11px;
-    }
-
-    .day-number{
-        font-size:11px;
-    }
-
-    .period-dot,
-    .predicted-dot{
-
-        width:6px;
-        height:6px;
-
-        left:7px;
-        bottom:7px;
-    }
-
-    .symptom-marker{
-
-        width:6px;
-        height:6px;
-
-        right:6px;
-        bottom:7px;
-    }
-
-    .summary{
-        grid-template-columns:1fr;
-    }
-
+body.dark .modal-box{
+    background:#2b232b;
 }
 
-@media(max-width:450px){
-
-    .header,
-    .container{
-        width:92%;
-    }
-
-    .page-title h1{
-        font-size:29px;
-    }
-
-    .calendar-card{
-        border-radius:21px;
-    }
-
-    .day{
-        min-height:50px;
-    }
-
-    .weekday{
-        font-size:8px;
-    }
-
-    .month-title strong{
-        font-size:18px;
-    }
-
-    #symptomModal{
-        padding:14px;
-    }
-
-    #symptomModal .modal{
-
-        max-height:
-            calc(100vh - 28px);
-
-        padding:20px;
-
-        border-radius:22px;
-    }
-
-    #symptomModal
-    .symptom-modal-options{
-
-        grid-template-columns:
-            1fr 1fr;
-
-        gap:8px;
-    }
-
+body.dark .close-btn{
+    background:#3b3038;
+    color:#cdbbc4;
 }
 
+body.dark .form-label,
+body.dark .symptom-title{
+    color:#bbaab2;
+}
+
+body.dark .date-input,
+body.dark .symptom-option label{
+    background:#332932;
+    border-color:#493b44;
+    color:#ddd0d6;
+}
+
+body.dark .symptom-option input:checked + label{
+    background:#49303b;
+    border-color:#b96887;
+    color:#f09ab7;
+}
 </style>
 </head>
 
-
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
+<div class="container">
 
-<header class="header">
+    <header class="header">
+        <h1>สวัสดีจาก Bloom 🌷</h1>
+        <p>ติดตามรอบเดือนของคุณอย่างเป็นส่วนตัว</p>
+    </header>
 
-    <div class="logo">
+    <!-- LATEST PERIOD -->
 
-        <div class="logo-icon">
-            ✿
-        </div>
+    <section class="card">
+        <div class="period-box">
 
-        Bloom
-
-    </div>
-
-    <button
-        class="back-btn"
-        onclick="goDashboard()"
-    >
-        ← Dashboard
-    </button>
-
-</header>
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main class="container">
-
-    <section class="page-title">
-
-        <small>
-            BLOOM CALENDAR
-        </small>
-
-        <h1>
-            ปฏิทินรอบเดือน
-        </h1>
-
-        <p>
-            ดูประวัติและการคาดการณ์ในแต่ละวัน
-        </p>
-
-    </section>
-
-
-    <!-- =========================
-         CALENDAR
-    ========================= -->
-
-    <section class="calendar-card">
-
-        <div class="calendar-header">
-
-            <button
-                class="month-btn"
-                onclick="previousMonth()"
-            >
-                ‹
-            </button>
-
-            <div class="month-title">
-
-                <strong id="monthTitle">
-                    -
-                </strong>
-
-                <small id="monthYear">
-                    -
-                </small>
-
-            </div>
-
-            <button
-                class="month-btn"
-                onclick="nextMonth()"
-            >
-                ›
-            </button>
-
-        </div>
-
-
-        <div class="weekdays">
-
-            <div class="weekday">อา.</div>
-            <div class="weekday">จ.</div>
-            <div class="weekday">อ.</div>
-            <div class="weekday">พ.</div>
-            <div class="weekday">พฤ.</div>
-            <div class="weekday">ศ.</div>
-            <div class="weekday">ส.</div>
-
-        </div>
-
-
-        <div
-            class="calendar-grid"
-            id="calendarGrid"
-        ></div>
-
-
-        <div class="legend">
-
-            <div class="legend-item">
-
-                <span
-                    class="legend-dot legend-period"
-                ></span>
-
-                มีประจำเดือน
-
-            </div>
-
-            <div class="legend-item">
-
-                <span
-                    class="legend-dot legend-predicted"
-                ></span>
-
-                คาดการณ์
-
-            </div>
-
-            <div class="legend-item">
-
-                <span
-                    class="legend-dot legend-today"
-                ></span>
-
-                วันนี้
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SUMMARY
-    ========================= -->
-
-    <section class="summary">
-
-        <div class="summary-card">
-
-            <div class="summary-icon">
-                🩸
-            </div>
-
-            <div class="summary-label">
-                รอบล่าสุด
-            </div>
-
-            <div
-                class="summary-value"
-                id="lastPeriod"
-            >
-                ยังไม่มีข้อมูล
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-icon">
+            <div class="period-icon">
                 🌸
             </div>
 
-            <div class="summary-label">
-                รอบถัดไปโดยประมาณ
+            <div class="period-label">
+                ประจำเดือนครั้งล่าสุด
             </div>
 
-            <div
-                class="summary-value"
-                id="nextPeriod"
-            >
+            <div class="period-date" id="latestPeriod">
                 ยังไม่มีข้อมูล
             </div>
 
+            <div class="period-sub" id="latestPeriodSub">
+                เริ่มบันทึกข้อมูลเพื่อดูสถิติของคุณ
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INFO -->
+
+    <section class="card">
+
+        <div class="card-title">
+            ภาพรวมรอบเดือน
         </div>
 
+        <div class="info-grid">
 
-        <div class="summary-card">
+            <div class="info-item">
+                <div class="info-label">
+                    รอบถัดไปโดยประมาณ
+                </div>
 
-            <div class="summary-icon">
-                🔄
+                <div class="info-value" id="nextPeriod">
+                    —
+                </div>
             </div>
 
-            <div class="summary-label">
-                รอบเฉลี่ย
+            <div class="info-item">
+                <div class="info-label">
+                    ความยาวรอบเฉลี่ย
+                </div>
+
+                <div class="info-value" id="avgCycle">
+                    —
+                </div>
             </div>
 
-            <div
-                class="summary-value"
-                id="averageCycle"
-            >
-                28 วัน
+            <div class="info-item">
+                <div class="info-label">
+                    ระยะเวลาประจำเดือน
+                </div>
+
+                <div class="info-value" id="avgDuration">
+                    —
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">
+                    วันที่บันทึก
+                </div>
+
+                <div class="info-value" id="recordCount">
+                    0 รอบ
+                </div>
             </div>
 
         </div>
 
     </section>
 
-</main>
+    <!-- QUICK ACTIONS -->
+
+    <section class="card">
+
+        <div class="card-title">
+            เมนูด่วน
+        </div>
+
+        <div class="action-list">
+
+            <button class="action-btn" onclick="recordPeriod()">
+                <span>🩸</span>
+                บันทึกรอบเดือน
+            </button>
+
+            <button class="action-btn" onclick="location.href='calendar.html'">
+                <span>📅</span>
+                ปฏิทิน
+            </button>
+
+            <button class="action-btn" onclick="location.href='stats.html'">
+                <span>📊</span>
+                สถิติ
+            </button>
+
+            <button class="action-btn" onclick="openSymptomModal()">
+                <span>📝</span>
+                บันทึกอาการ
+            </button>
+
+        </div>
+
+    </section>
+
+    <div class="privacy">
+        🔒 ข้อมูลของคุณจะถูกเก็บไว้ในอุปกรณ์นี้<br>
+        Bloom ไม่ส่งข้อมูลส่วนตัวของคุณไปยังเซิร์ฟเวอร์
+    </div>
+
+</div>
 
 
-<!-- =========================
-     BOTTOM NAV
-========================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
-    <button
-        class="nav-item"
-        onclick="goDashboard()"
-    >
+    <div class="nav-inner">
 
-        <span>⌂</span>
-        <span>หน้าหลัก</span>
+        <a href="dashboard.html" class="nav-item active">
+            <span>🏠</span>
+            หน้าหลัก
+        </a>
 
-    </button>
+        <a href="calendar.html" class="nav-item">
+            <span>📅</span>
+            ปฏิทิน
+        </a>
 
+        <a href="stats.html" class="nav-item">
+            <span>📊</span>
+            สถิติ
+        </a>
 
-    <button
-        class="nav-item active"
-    >
+        <a href="settings.html" class="nav-item">
+            <span>⚙️</span>
+            ตั้งค่า
+        </a>
 
-        <span>▣</span>
-        <span>ปฏิทิน</span>
-
-    </button>
-
-
-    <button
-        class="nav-item"
-        onclick="goStats()"
-    >
-
-        <span>◈</span>
-        <span>สถิติ</span>
-
-    </button>
-
-
-    <button
-        class="nav-item"
-        onclick="goSettings()"
-    >
-
-        <span>⚙</span>
-        <span>ตั้งค่า</span>
-
-    </button>
+    </div>
 
 </nav>
 
 
-<!-- =====================================================
-     SYMPTOM MODAL
+<!-- SYMPTOM MODAL -->
 
-     สำคัญ:
-     ตรงนี้จะ "ไม่แสดง" ตอนเปิดเว็บ
-     เพราะ #symptomModal { display:none; }
+<div class="modal" id="symptomModal">
 
-     เมื่อกดวันที่ JavaScript จะเติม class "show"
-     แล้วจึงแสดงตรงกลางหน้าจอ
-===================================================== -->
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>📝 บันทึกอาการ</h2>
+
+            <button
+                class="close-btn"
+                onclick="closeSymptomModal()">
+                ×
+            </button>
+
+        </div>
+
+        <label class="form-label">
+            วันที่
+        </label>
+
+        <input
+            type="date"
+            id="symptomDate"
+            class="date-input"
+        >
+
+        <div class="symptom-title">
+            วันนี้มีอาการอะไรบ้าง?
+        </div>
+
+        <div class="symptom-grid">
+
+            <div class="symptom-option">
+                <input
+                    type="checkbox"
+                    id="symptom-cramp"
+                    value="cramp"
+                >
+                <label for="symptom-cramp">
+                    😣 ปวดท้อง
+                </label>
+            </div>
+
+            <div class="symptom-option">
+                <input
+                    type="checkbox"
+                    id="symptom-headache"
+                    value="headache"
+                >
+                <label for="symptom-headache">
+                    🤕 ปวดหัว
+                </label>
+            </div>
+
+            <div class="symptom-option">
+                <input
+                    type="checkbox"
+                    id="symptom-tired"
+                    value="tired"
+                >
+                <label for="symptom-tired">
+                    😴 เหนื่อย/ง่วง
+                </label>
+            </div>
+
+            <div class="symptom-option">
+                <input
+                    type="checkbox"
+                    id="symptom-back"
+                    value="back"
+                >
+                <label for="symptom-back">
+                    🩹 ปวดหลัง
+                </label>
+            </div>
+
+            <div class="symptom-option">
+                <input
+                    type="checkbox"
+                    id="symptom-mood"
+                    value="mood"
+                >
+                <label for="symptom-mood">
+                    🌧️ อารมณ์แปรปรวน
+                </label>
+            </div>
+
+            <div class="symptom-option">
+                <input
+                    type="checkbox"
+                    id="symptom-normal"
+                    value="normal"
+                >
+                <label for="symptom-normal">
+                    🙂 อารมณ์ปกติ
+                </label>
+            </div>
+
+        </div>
+
+        <button
+            class="save-btn"
+            onclick="saveSymptoms()">
+            บันทึกอาการ
+        </button>
+
+        <button
+            class="delete-symptom-btn"
+            onclick="deleteSymptoms()">
+            ลบข้อมูลอาการของวันนี้
+        </button>
+
+    </div>
+
+</div>
 
 
+<script>
 
-/* =====================================================
-   THEME
-===================================================== */
+/* ================================
+   SERVICE WORKER
+================================ */
 
-(function(){
+if ("serviceWorker" in navigator) {
 
-    const theme =
-        localStorage.getItem(
-            "bloom_theme"
-        ) || "light";
+    window.addEventListener("load", () => {
 
-    if(theme === "dark"){
+        navigator.serviceWorker
+            .register("./sw.js")
+            .catch(error => {
+                console.log("Service Worker:", error);
+            });
 
-        document.documentElement
-            .classList
-            .add("dark-mode");
+    });
 
-    }
-
-})();
+}
 
 
-/* =====================================================
+/* ================================
    STORAGE
-===================================================== */
+================================ */
 
-const STORAGE_KEY =
-    "bloom_periods";
-
-const SYMPTOM_KEY =
-    "bloom_symptoms";
+const STORAGE_KEY = "bloom_periods";
+const SYMPTOM_KEY = "bloom_symptoms";
 
 
 function getPeriods(){
@@ -1460,9 +762,7 @@ function getPeriods(){
     try{
 
         return JSON.parse(
-            localStorage.getItem(
-                STORAGE_KEY
-            )
+            localStorage.getItem(STORAGE_KEY)
         ) || [];
 
     }catch(error){
@@ -1479,10 +779,8 @@ function getSymptoms(){
     try{
 
         return JSON.parse(
-            localStorage.getItem(
-                SYMPTOM_KEY
-            ) || "{}"
-        );
+            localStorage.getItem(SYMPTOM_KEY)
+        ) || {};
 
     }catch(error){
 
@@ -1493,59 +791,30 @@ function getSymptoms(){
 }
 
 
-/* =====================================================
-   DATE
-===================================================== */
+/* ================================
+   DATE HELPERS
+================================ */
 
 function parseDate(value){
 
-    if(!value){
-        return null;
-    }
-
-    const parts =
-        value.split("-").map(Number);
+    const parts = value.split("-");
 
     return new Date(
-        parts[0],
-        parts[1]-1,
-        parts[2]
+        Number(parts[0]),
+        Number(parts[1]) - 1,
+        Number(parts[2])
     );
 
 }
 
 
-function dateKey(date){
+function formatDate(value){
 
-    const year =
-        date.getFullYear();
-
-    const month =
-        String(
-            date.getMonth()+1
-        ).padStart(2,"0");
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
-
-    return (
-        year +
-        "-" +
-        month +
-        "-" +
-        day
-    );
-
-}
-
-
-function formatDate(date){
-
-    if(!date){
+    if(!value){
         return "—";
     }
+
+    const date = parseDate(value);
 
     return date.toLocaleDateString(
         "th-TH",
@@ -1559,272 +828,294 @@ function formatDate(date){
 }
 
 
-function addDays(date,days){
+function daysBetween(a,b){
 
-    const result =
-        new Date(date);
-
-    result.setDate(
-        result.getDate()+days
-    );
-
-    return result;
-
-}
-
-
-function diffDays(a,b){
-
-    const first =
-        new Date(
-            a.getFullYear(),
-            a.getMonth(),
-            a.getDate()
-        );
-
-    const second =
-        new Date(
-            b.getFullYear(),
-            b.getMonth(),
-            b.getDate()
-        );
+    const ms = 1000 * 60 * 60 * 24;
 
     return Math.round(
-        (second-first)/86400000
+        (parseDate(b) - parseDate(a)) / ms
     );
 
 }
 
 
-/* =====================================================
-   CYCLE CALCULATION
-===================================================== */
+/* ================================
+   DASHBOARD
+================================ */
 
-function calculateData(periods){
+function updateDashboard(){
+
+    const periods = getPeriods();
+
+    const latestPeriod =
+        document.getElementById("latestPeriod");
+
+    const latestSub =
+        document.getElementById("latestPeriodSub");
+
+    const nextPeriod =
+        document.getElementById("nextPeriod");
+
+    const avgCycle =
+        document.getElementById("avgCycle");
+
+    const avgDuration =
+        document.getElementById("avgDuration");
+
+    const recordCount =
+        document.getElementById("recordCount");
+
 
     if(!periods.length){
 
-        return {
+        latestPeriod.textContent =
+            "ยังไม่มีข้อมูล";
 
-            averageCycle:28,
+        latestSub.textContent =
+            "เริ่มบันทึกข้อมูลเพื่อดูสถิติของคุณ";
 
-            latest:null,
+        nextPeriod.textContent = "—";
+        avgCycle.textContent = "—";
+        avgDuration.textContent = "—";
+        recordCount.textContent = "0 รอบ";
 
-            nextDate:null
-
-        };
-
-    }
-
-
-    const sorted =
-        [...periods]
-            .filter(
-                item =>
-                    item &&
-                    item.start
-            )
-            .sort(
-                (a,b) =>
-                    parseDate(a.start) -
-                    parseDate(b.start)
-            );
-
-
-    if(!sorted.length){
-
-        return {
-
-            averageCycle:28,
-
-            latest:null,
-
-            nextDate:null
-
-        };
+        return;
 
     }
 
 
-    const cycles=[];
+    const sorted = [...periods].sort(
+        (a,b) =>
+            parseDate(a.start) -
+            parseDate(b.start)
+    );
 
 
-    for(
-        let i=1;
-        i<sorted.length;
-        i++
-    ){
+    const latest =
+        sorted[sorted.length - 1];
 
-        const previous =
-            parseDate(
-                sorted[i-1].start
-            );
 
-        const current =
-            parseDate(
+    latestPeriod.textContent =
+        formatDate(latest.start);
+
+
+    if(latest.end){
+
+        latestSub.textContent =
+            `สิ้นสุด ${formatDate(latest.end)}`;
+
+    }else{
+
+        latestSub.textContent =
+            "ยังไม่ได้บันทึกวันสิ้นสุด";
+
+    }
+
+
+    recordCount.textContent =
+        `${sorted.length} รอบ`;
+
+
+    /* Average cycle */
+
+    const cycles = [];
+
+    for(let i=1;i<sorted.length;i++){
+
+        const diff =
+            daysBetween(
+                sorted[i-1].start,
                 sorted[i].start
             );
 
-        const cycle =
-            diffDays(
-                previous,
-                current
-            );
+        if(diff > 0){
 
-        if(
-            cycle>0 &&
-            cycle<100
-        ){
-
-            cycles.push(cycle);
+            cycles.push(diff);
 
         }
 
     }
 
 
-    const averageCycle =
-        cycles.length
-            ? Math.round(
+    if(cycles.length){
+
+        const avg =
+            Math.round(
                 cycles.reduce(
                     (a,b)=>a+b,
                     0
                 ) / cycles.length
-            )
-            : 28;
+            );
+
+        avgCycle.textContent =
+            `${avg} วัน`;
 
 
-    const latest =
-        sorted[
-            sorted.length-1
-        ];
+        const next =
+            new Date(
+                parseDate(latest.start)
+            );
 
-
-    let nextDate =
-        addDays(
-            parseDate(
-                latest.start
-            ),
-            averageCycle
+        next.setDate(
+            next.getDate() + avg
         );
 
+
+        const nextValue =
+            next.getFullYear() +
+            "-" +
+            String(
+                next.getMonth()+1
+            ).padStart(2,"0") +
+            "-" +
+            String(
+                next.getDate()
+            ).padStart(2,"0");
+
+
+        nextPeriod.textContent =
+            formatDate(nextValue);
+
+    }else{
+
+        avgCycle.textContent =
+            "ต้องมี 2 รอบ";
+
+        nextPeriod.textContent =
+            "—";
+
+    }
+
+
+    /* Average duration */
+
+    const durations = [];
+
+    sorted.forEach(period => {
+
+        if(period.start && period.end){
+
+            const duration =
+                daysBetween(
+                    period.start,
+                    period.end
+                ) + 1;
+
+            if(duration > 0){
+
+                durations.push(duration);
+
+            }
+
+        }
+
+    });
+
+
+    if(durations.length){
+
+        const avgDurationValue =
+            Math.round(
+                durations.reduce(
+                    (a,b)=>a+b,
+                    0
+                ) / durations.length
+            );
+
+        avgDuration.textContent =
+            `${avgDurationValue} วัน`;
+
+    }else{
+
+        avgDuration.textContent =
+            "—";
+
+    }
+
+}
+
+
+/* ================================
+   PERIOD RECORD
+================================ */
+
+function recordPeriod(){
 
     const today =
         new Date();
 
-
-    while(
-        nextDate < today
-    ){
-
-        nextDate =
-            addDays(
-                nextDate,
-                averageCycle
-            );
-
-    }
+    const value =
+        today.getFullYear() +
+        "-" +
+        String(
+            today.getMonth()+1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            today.getDate()
+        ).padStart(2,"0");
 
 
-    return {
-
-        averageCycle,
-
-        latest,
-
-        nextDate
-
-    };
-
-}
-
-
-/* =====================================================
-   SYMPTOMS
-===================================================== */
-
-const SYMPTOMS = [
-
-    ["cramp","😣 ปวดท้อง"],
-
-    ["headache","🤕 ปวดหัว"],
-
-    ["tired","😴 เหนื่อย/ง่วง"],
-
-    ["back","🩹 ปวดหลัง"],
-
-    ["mood","🌧️ อารมณ์แปรปรวน"],
-
-    ["normal","🙂 อารมณ์ปกติ"]
-
-];
-
-
-let selectedSymptoms =
-    new Set();
-
-
-function renderSymptomOptions(){
-
-    const box =
-        document.getElementById(
-            "symptomOptions"
+    const end =
+        prompt(
+            "กรอกวันเริ่มประจำเดือน\n\n" +
+            "ตัวอย่าง: " +
+            value,
+            value
         );
 
-    if(!box){
+
+    if(!end){
+
         return;
+
     }
 
 
-    box.innerHTML =
-        SYMPTOMS.map(
-            ([key,label]) => {
+    const periods =
+        getPeriods();
 
-                const selected =
-                    selectedSymptoms.has(key)
-                        ? "selected"
-                        : "";
 
-                return `
+    periods.push({
 
-                    <button
-                        type="button"
-                        class="symptom-option ${selected}"
-                        onclick="toggleSymptom('${key}')"
-                    >
-                        ${label}
-                    </button>
+        start:end,
+        end:null
 
-                `;
+    });
 
-            }
-        ).join("");
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(periods)
+    );
+
+
+    updateDashboard();
 
 }
 
 
-function toggleSymptom(key){
+/* ================================
+   SYMPTOM MODAL
+================================ */
 
-    if(
-        selectedSymptoms.has(key)
-    ){
+function getToday(){
 
-        selectedSymptoms.delete(key);
+    const today =
+        new Date();
 
-    }else{
-
-        selectedSymptoms.add(key);
-
-    }
-
-    renderSymptomOptions();
+    return today.getFullYear() +
+        "-" +
+        String(
+            today.getMonth()+1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            today.getDate()
+        ).padStart(2,"0");
 
 }
 
-
-/* =====================================================
-   OPEN MODAL
-===================================================== */
 
 function openSymptomModal(date){
 
@@ -1833,78 +1124,86 @@ function openSymptomModal(date){
             "symptomModal"
         );
 
-    const input =
+    const dateInput =
         document.getElementById(
             "symptomDate"
         );
+
+
+    const selectedDate =
+        date || getToday();
+
+
+    dateInput.value =
+        selectedDate;
+
+
+    clearSymptomCheckboxes();
+
 
     const symptoms =
         getSymptoms();
 
 
-    input.value = date;
+    if(
+        symptoms[selectedDate] &&
+        Array.isArray(
+            symptoms[selectedDate]
+        )
+    ){
+
+        symptoms[selectedDate]
+            .forEach(key => {
+
+                const checkbox =
+                    document.getElementById(
+                        "symptom-" + key
+                    );
+
+                if(checkbox){
+
+                    checkbox.checked =
+                        true;
+
+                }
+
+            });
+
+    }
 
 
-    selectedSymptoms =
-        new Set(
-            symptoms[date] || []
-        );
-
-
-    renderSymptomOptions();
-
-
-    /*
-       สำคัญมาก
-
-       Modal จะเปลี่ยนจาก
-
-       display:none
-
-       เป็น
-
-       display:flex
-
-       เมื่อเติม class show
-    */
-
-    modal.classList.add(
-        "show"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
+    modal.classList.add("show");
 
 }
 
-
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
 
 function closeSymptomModal(){
 
-    const modal =
-        document.getElementById(
-            "symptomModal"
-        );
-
-
-    modal.classList.remove(
-        "show"
-    );
-
-
-    document.body.style.overflow =
-        "";
+    document
+        .getElementById("symptomModal")
+        .classList.remove("show");
 
 }
 
 
-/* =====================================================
+function clearSymptomCheckboxes(){
+
+    document
+        .querySelectorAll(
+            ".symptom-option input"
+        )
+        .forEach(input => {
+
+            input.checked = false;
+
+        });
+
+}
+
+
+/* ================================
    SAVE SYMPTOMS
-===================================================== */
+================================ */
 
 function saveSymptoms(){
 
@@ -1915,22 +1214,38 @@ function saveSymptoms(){
 
 
     if(!date){
+
+        alert("กรุณาเลือกวันที่");
+
         return;
+
     }
+
+
+    const selected = [];
+
+
+    document
+        .querySelectorAll(
+            ".symptom-option input:checked"
+        )
+        .forEach(input => {
+
+            selected.push(
+                input.value
+            );
+
+        });
 
 
     const symptoms =
         getSymptoms();
 
 
-    if(
-        selectedSymptoms.size > 0
-    ){
+    if(selected.length){
 
         symptoms[date] =
-            Array.from(
-                selectedSymptoms
-            );
+            selected;
 
     }else{
 
@@ -1941,537 +1256,86 @@ function saveSymptoms(){
 
     localStorage.setItem(
         SYMPTOM_KEY,
-        JSON.stringify(
-            symptoms
-        )
+        JSON.stringify(symptoms)
     );
 
 
     closeSymptomModal();
 
-
-    renderCalendar();
-
 }
 
 
-/* =====================================================
-   CALENDAR
-===================================================== */
+/* ================================
+   DELETE SYMPTOMS
+================================ */
 
-let currentDate =
-    new Date();
+function deleteSymptoms(){
 
-
-function previousMonth(){
-
-    currentDate.setMonth(
-        currentDate.getMonth()-1
-    );
-
-    renderCalendar();
-
-}
-
-
-function nextMonth(){
-
-    currentDate.setMonth(
-        currentDate.getMonth()+1
-    );
-
-    renderCalendar();
-
-}
-
-
-/* =====================================================
-   RENDER CALENDAR
-===================================================== */
-
-function renderCalendar(){
-
-    const year =
-        currentDate.getFullYear();
-
-    const month =
-        currentDate.getMonth();
-
-
-    const monthName =
-        currentDate.toLocaleDateString(
-            "th-TH",
-            {
-                month:"long"
-            }
-        );
-
-
-    document.getElementById(
-        "monthTitle"
-    ).textContent =
-        monthName;
-
-
-    document.getElementById(
-        "monthYear"
-    ).textContent =
-        year;
-
-
-    const grid =
+    const date =
         document.getElementById(
-            "calendarGrid"
-        );
+            "symptomDate"
+        ).value;
 
 
-    grid.innerHTML = "";
+    if(!date){
 
+        return;
 
-    const periods =
-        getPeriods();
+    }
+
 
     const symptoms =
         getSymptoms();
 
-    const data =
-        calculateData(
-            periods
-        );
 
+    if(!symptoms[date]){
 
-    const firstDay =
-        new Date(
-            year,
-            month,
-            1
-        );
+        closeSymptomModal();
 
-
-    const startWeekday =
-        firstDay.getDay();
-
-
-    const daysInMonth =
-        new Date(
-            year,
-            month+1,
-            0
-        ).getDate();
-
-
-    const previousDays =
-        new Date(
-            year,
-            month,
-            0
-        ).getDate();
-
-
-    for(
-        let i=0;
-        i<42;
-        i++
-    ){
-
-        let dayNumber;
-
-        let cellMonth =
-            month;
-
-        let cellYear =
-            year;
-
-        let otherMonth =
-            false;
-
-
-        if(
-            i<startWeekday
-        ){
-
-            dayNumber =
-                previousDays -
-                startWeekday +
-                i +
-                1;
-
-            cellMonth =
-                month-1;
-
-            otherMonth =
-                true;
-
-
-            if(cellMonth<0){
-
-                cellMonth=11;
-
-                cellYear--;
-
-            }
-
-        }else if(
-            i >=
-            startWeekday +
-            daysInMonth
-        ){
-
-            dayNumber =
-                i -
-                startWeekday -
-                daysInMonth +
-                1;
-
-            cellMonth =
-                month+1;
-
-            otherMonth =
-                true;
-
-
-            if(cellMonth>11){
-
-                cellMonth=0;
-
-                cellYear++;
-
-            }
-
-        }else{
-
-            dayNumber =
-                i -
-                startWeekday +
-                1;
-
-        }
-
-
-        const date =
-            new Date(
-                cellYear,
-                cellMonth,
-                dayNumber
-            );
-
-
-        const key =
-            dateKey(date);
-
-
-        const cell =
-            document.createElement(
-                "div"
-            );
-
-
-        cell.className =
-            "day";
-
-
-        if(otherMonth){
-
-            cell.classList.add(
-                "other-month"
-            );
-
-        }
-
-
-        /* TODAY */
-
-        const today =
-            new Date();
-
-
-        if(
-            key ===
-            dateKey(today)
-        ){
-
-            cell.classList.add(
-                "today"
-            );
-
-        }
-
-
-        /* PERIOD */
-
-        let isPeriod=false;
-
-
-        periods.forEach(
-            period => {
-
-                if(!period.start){
-                    return;
-                }
-
-
-                const start =
-                    parseDate(
-                        period.start
-                    );
-
-
-                const end =
-                    period.end
-                        ? parseDate(
-                            period.end
-                        )
-                        : start;
-
-
-                if(
-                    date>=start &&
-                    date<=end
-                ){
-
-                    isPeriod=true;
-
-                }
-
-            }
-        );
-
-
-        if(isPeriod){
-
-            cell.classList.add(
-                "period"
-            );
-
-        }
-
-
-        /* PREDICTED */
-
-        let isPredicted=false;
-
-
-        if(data.nextDate){
-
-            const predictionStart =
-                data.nextDate;
-
-
-            const predictionEnd =
-                addDays(
-                    predictionStart,
-                    4
-                );
-
-
-            if(
-                date>=predictionStart &&
-                date<=predictionEnd
-            ){
-
-                isPredicted=true;
-
-            }
-
-        }
-
-
-        if(
-            isPredicted &&
-            !isPeriod
-        ){
-
-            cell.classList.add(
-                "predicted"
-            );
-
-        }
-
-
-        /* HTML */
-
-        cell.innerHTML = `
-
-            <div class="day-number">
-                ${dayNumber}
-            </div>
-
-            ${
-                isPeriod
-                ?
-                `
-                    <div
-                        class="period-dot"
-                    ></div>
-                `
-                :
-                ""
-            }
-
-            ${
-                isPredicted &&
-                !isPeriod
-                ?
-                `
-                    <div
-                        class="predicted-dot"
-                    ></div>
-                `
-                :
-                ""
-            }
-
-        `;
-
-
-        /* SYMPTOM MARKER */
-
-        if(
-            symptoms[key] &&
-            symptoms[key].length
-        ){
-
-            const marker =
-                document.createElement(
-                    "div"
-                );
-
-            marker.className =
-                "symptom-marker";
-
-            cell.appendChild(
-                marker
-            );
-
-        }
-
-
-        /* CLICK */
-
-        cell.addEventListener(
-            "click",
-            function(){
-
-                openSymptomModal(
-                    key
-                );
-
-            }
-        );
-
-
-        grid.appendChild(
-            cell
-        );
+        return;
 
     }
 
 
-    updateSummary(
-        data
+    const confirmDelete =
+        confirm(
+            "ต้องการลบข้อมูลอาการของวันนี้ใช่ไหม?"
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+
+    delete symptoms[date];
+
+
+    localStorage.setItem(
+        SYMPTOM_KEY,
+        JSON.stringify(symptoms)
     );
 
-}
 
-
-/* =====================================================
-   SUMMARY
-===================================================== */
-
-function updateSummary(data){
-
-    document.getElementById(
-        "averageCycle"
-    ).textContent =
-        data.averageCycle +
-        " วัน";
-
-
-    if(data.latest){
-
-        document.getElementById(
-            "lastPeriod"
-        ).textContent =
-            formatDate(
-                parseDate(
-                    data.latest.start
-                )
-            );
-
-    }else{
-
-        document.getElementById(
-            "lastPeriod"
-        ).textContent =
-            "ยังไม่มีข้อมูล";
-
-    }
-
-
-    if(data.nextDate){
-
-        document.getElementById(
-            "nextPeriod"
-        ).textContent =
-            formatDate(
-                data.nextDate
-            );
-
-    }else{
-
-        document.getElementById(
-            "nextPeriod"
-        ).textContent =
-            "ยังไม่มีข้อมูล";
-
-    }
+    closeSymptomModal();
 
 }
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function goDashboard(){
-
-    window.location.href =
-        "dashboard.html";
-
-}
-
-
-function goStats(){
-
-    window.location.href =
-        "stats.html";
-
-}
-
-
-function goSettings(){
-
-    window.location.href =
-        "settings.html";
-
-}
-
-
-/* =====================================================
-   CLICK OUTSIDE MODAL
-===================================================== */
+/* ================================
+   MODAL BACKGROUND
+================================ */
 
 document
-    .getElementById(
-        "symptomModal"
-    )
+    .getElementById("symptomModal")
     .addEventListener(
         "click",
         function(event){
 
             if(
-                event.target ===
-                this
+                event.target === this
             ){
 
                 closeSymptomModal();
@@ -2482,63 +1346,43 @@ document
     );
 
 
-/* =====================================================
-   ESC
-===================================================== */
+/* ================================
+   THEME
+================================ */
 
-document.addEventListener(
-    "keydown",
-    function(event){
+function applyTheme(){
 
-        if(
-            event.key === "Escape"
-        ){
+    const theme =
+        localStorage.getItem(
+            "bloom_theme"
+        );
 
-            closeSymptomModal();
 
-        }
+    if(theme === "dark"){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }else{
+
+        document.body.classList.remove(
+            "dark"
+        );
 
     }
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-renderCalendar();
-
-
-/* =====================================================
-   SERVICE WORKER
-===================================================== */
-
-if(
-    "serviceWorker"
-    in navigator
-){
-
-    window.addEventListener(
-        "load",
-        function(){
-
-            navigator.serviceWorker
-                .register("./sw.js")
-                .catch(
-                    function(error){
-
-                        console.log(
-                            "Service Worker Error:",
-                            error
-                        );
-
-                    }
-                );
-
-        }
-    );
 
 }
+
+
+applyTheme();
+
+
+/* ================================
+   START
+================================ */
+
+updateDashboard();
 
 </script>
 
